@@ -325,70 +325,9 @@
     </section>
 
     <!-- =========================================
-         NOVA SEÇÃO: ESPAÇO SMART PET (GEMINI API)
+         NOVA SEÇÃO: ESPAÇO SMART PET (GEMINI API) 
+    (Removido para exitar exposição desnecessária de api)
     ========================================== -->
-    <section id="smart-pet" class="py-16 bg-green-50 border-t border-green-100 relative overflow-hidden">
-        <!-- Efeito de fundo (Sparkles) -->
-        <div class="absolute top-0 right-0 opacity-10 text-9xl text-vet-claro pointer-events-none transform translate-x-1/3 -translate-y-1/3">
-            <i class="fa-solid fa-wand-magic-sparkles"></i>
-        </div>
-
-        <div class="container mx-auto px-6 relative z-10">
-            <div class="text-center mb-10">
-                <span class="bg-vet-claro text-white px-3 py-1 rounded-full text-xs font-bold mb-3 inline-block uppercase tracking-wider">
-                    <i class="fa-solid fa-robot mr-1"></i> Inteligência Artificial
-                </span>
-                <h2 class="text-3xl font-bold text-vet-escuro">Espaço Smart Pet ✨</h2>
-                <p class="text-gray-600 mt-2">Tire dúvidas rápidas ou receba dicas personalizadas usando nossa IA.</p>
-            </div>
-
-            <div class="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
-                
-                <!-- FUNCIONALIDADE 1: Tira-Dúvidas -->
-                <div class="bg-white p-8 rounded-2xl shadow-lg border border-green-100 flex flex-col h-full">
-                    <h3 class="text-xl font-bold text-vet-escuro mb-4 flex items-center">
-                        <i class="fa-regular fa-comments text-vet-claro mr-2"></i> Dúvida Rápida
-                    </h3>
-                    <p class="text-sm text-gray-500 mb-4">Descreva um comportamento ou sintoma e receba uma orientação preliminar.</p>
-                    
-                    <textarea id="questionInput" rows="3" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-vet-claro focus:outline-none mb-4 text-sm" placeholder="Ex: Meu cachorro comeu um pedaço de chocolate, o que fazer?"></textarea>
-                    
-                    <button onclick="askVetAI()" class="w-full bg-vet-escuro hover:bg-vet-claro text-white font-bold py-3 rounded-lg transition flex items-center justify-center gap-2">
-                        <span id="btnTextQuestion">Perguntar à IA ✨</span>
-                        <span id="loaderQuestion" class="loader hidden"></span>
-                    </button>
-
-                    <div id="responseQuestion" class="mt-4 p-4 bg-green-50 rounded-lg text-sm text-gray-700 hidden border-l-4 border-vet-claro">
-                        <!-- Resposta aparecerá aqui -->
-                    </div>
-                    <p class="text-xs text-gray-400 mt-auto pt-4 text-center">⚠️ A IA não substitui uma consulta veterinária real.</p>
-                </div>
-
-                <!-- FUNCIONALIDADE 2: Dica Personalizada -->
-                <div class="bg-white p-8 rounded-2xl shadow-lg border border-green-100 flex flex-col h-full">
-                    <h3 class="text-xl font-bold text-vet-escuro mb-4 flex items-center">
-                        <i class="fa-solid fa-lightbulb text-vet-claro mr-2"></i> Dica Personalizada
-                    </h3>
-                    <p class="text-sm text-gray-500 mb-4">Receba uma curiosidade ou dica de cuidado especial para a raça do seu pet.</p>
-                    
-                    <div class="grid grid-cols-2 gap-3 mb-4">
-                        <input type="text" id="petName" class="p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-vet-claro text-sm" placeholder="Nome (ex: Thor)">
-                        <input type="text" id="petBreed" class="p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-vet-claro text-sm" placeholder="Raça (ex: Shih Tzu)">
-                    </div>
-                    
-                    <button onclick="getPetTip()" class="w-full bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-3 rounded-lg transition flex items-center justify-center gap-2">
-                        <span id="btnTextTip">Gerar Dica ✨</span>
-                        <span id="loaderTip" class="loader border-t-white hidden"></span>
-                    </button>
-
-                    <div id="responseTip" class="mt-4 p-4 bg-yellow-50 rounded-lg text-sm text-gray-700 hidden border-l-4 border-yellow-400">
-                        <!-- Resposta aparecerá aqui -->
-                    </div>
-                </div>
-
-            </div>
-        </div>
-    </section>
 
     <!-- =========================================
          INSTAGRAM (@rennevet)
