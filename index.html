@@ -1,14 +1,23 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
+
     <!-- Título da Página -->
     <title>Dr. Rennê Costa | Veterinário em Casa - Natal/RN</title>
-    
+
     <!-- SEO Local -->
-    <meta name="description" content="Dr. Rennê Costa - Veterinário Domiciliar em Natal/RN. Consultas, vacinas e exames no conforto do seu lar. Agende pelo WhatsApp (84) 99174-3293.">
+    <meta name="description"
+        content="Dr. Rennê Costa - Veterinário Domiciliar em Natal/RN. Consultas, vacinas e exames no conforto do seu lar. Agende pelo WhatsApp (84) 99174-3293. Medicina Veterinária de excelência.">
+
+    <!-- Google Fonts Premium -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
 
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -28,7 +37,8 @@
                         'vet-branco': '#FFFFFF',
                     },
                     fontFamily: {
-                        sans: ['Helvetica', 'Arial', 'sans-serif'],
+                        serif: ['Playfair Display', 'Georgia', 'serif'],
+                        sans: ['Inter', 'system-ui', 'sans-serif'],
                     }
                 }
             }
@@ -36,20 +46,114 @@
     </script>
 
     <style>
-        html { scroll-behavior: smooth; }
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+
+        /* Glassmorphism Header */
+        .header-glass {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+        }
+
+        /* Botão WhatsApp Flutuante */
         .zap-flutuante {
             position: fixed;
-            bottom: 20px;
-            right: 20px;
+            bottom: 24px;
+            right: 24px;
             z-index: 100;
             animation: pulse 2s infinite;
+            box-shadow: 0 8px 32px rgba(37, 211, 102, 0.4);
         }
+
         @keyframes pulse {
-            0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.7); }
-            70% { transform: scale(1.05); box-shadow: 0 0 0 15px rgba(37, 211, 102, 0); }
-            100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(37, 211, 102, 0); }
+            0% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.05);
+            }
+
+            100% {
+                transform: scale(1);
+            }
         }
-        /* Animação de carregamento */
+
+        /* Animações de Scroll */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Hero Overlay Gradiente */
+        .hero-overlay {
+            background: linear-gradient(135deg, rgba(27, 77, 62, 0.92) 0%, rgba(79, 157, 105, 0.85) 100%);
+        }
+
+        /* Card Premium Shadows */
+        .card-premium {
+            box-shadow: 0 4px 24px rgba(0, 0, 0, 0.06);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .card-premium:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 48px rgba(0, 0, 0, 0.12);
+        }
+
+        /* Glassmorphism Cards */
+        .glass-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.18);
+        }
+
+        /* Transições Suaves Universais */
+        button,
+        a,
+        .transition-smooth {
+            transition: all 0.3s ease-in-out;
+        }
+
+        /* Aspas Decorativas */
+        .quote-mark {
+            font-family: 'Playfair Display', serif;
+            font-size: 3rem;
+            line-height: 1;
+            color: rgba(79, 157, 105, 0.2);
+        }
+
+        /* Mobile Menu Animation */
+        .mobile-menu-slide {
+            animation: slideDown 0.3s ease-out;
+        }
+
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Loader */
         .loader {
             border: 4px solid #f3f3f3;
             border-top: 4px solid #1B4D3E;
@@ -59,134 +163,169 @@
             animation: spin 1s linear infinite;
             display: inline-block;
         }
+
         @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        /* Smooth Scroll Offset */
+        section {
+            scroll-margin-top: 80px;
         }
     </style>
 </head>
-<body class="bg-vet-beige text-gray-800 font-sans">
+
+<body class="bg-vet-beige text-gray-800">
 
     <!-- =========================================
          CABEÇALHO (HEADER)
     ========================================== -->
-    <header class="bg-white shadow-md fixed w-full z-50">
-        <div class="container mx-auto px-6 py-3 flex justify-between items-center">
-            
+    <header class="header-glass shadow-lg fixed w-full z-50 border-b border-gray-100">
+        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+
             <!-- LOGOMARCA -->
-            <a href="#" class="text-2xl font-bold text-vet-escuro flex items-center gap-2">
-                <img src="Logo.png" alt="Dr. Rennê Costa" class="h-10 w-auto object-contain">
-                    <i class="fa-solid text-vet-claro"></i> Dr. Rennê Costa
+            <a href="#"
+                class="text-2xl font-bold text-vet-escuro flex items-center gap-3 hover:opacity-80 transition-smooth">
+                <img src="Logo.png" alt="Dr. Rennê Costa" class="h-12 w-auto object-contain">
+                <span class="font-serif hidden sm:inline">Dr. Rennê Costa</span>
             </a>
 
             <!-- MENU (Desktop) -->
             <nav class="hidden md:flex space-x-8 items-center">
-                <a href="#sobre" class="hover:text-vet-claro transition font-medium">Sobre</a>
-                <a href="#servicos" class="hover:text-vet-claro transition font-medium">Serviços</a>
-                <a href="#depoimentos" class="hover:text-vet-claro transition font-medium">Depoimentos</a>
-                <a href="#clinicas" class="hover:text-vet-claro transition font-medium">Clínicas</a>
-                <a href="#smart-pet" class="text-vet-claro font-bold hover:text-vet-escuro transition"><i class="fa-solid fa-wand-magic-sparkles mr-1"></i> Smart Pet</a>
-                <a href="https://wa.me/5584991743293" target="_blank" class="bg-vet-escuro text-white px-5 py-2 rounded-full hover:bg-vet-claro transition font-semibold flex items-center gap-2">
-                    <i class="fa-brands fa-whatsapp"></i>Agendar no WhatsApp
+                <a href="#sobre" class="text-gray-700 hover:text-vet-claro transition-smooth font-medium">Sobre</a>
+                <a href="#servicos"
+                    class="text-gray-700 hover:text-vet-claro transition-smooth font-medium">Serviços</a>
+                <a href="#depoimentos"
+                    class="text-gray-700 hover:text-vet-claro transition-smooth font-medium">Depoimentos</a>
+                <a href="#clinicas"
+                    class="text-gray-700 hover:text-vet-claro transition-smooth font-medium">Clínicas</a>
+                <a href="https://wa.me/5584991743293" target="_blank"
+                    class="bg-vet-escuro text-white px-6 py-3 rounded-full hover:bg-vet-claro transition-smooth font-semibold shadow-lg hover:shadow-xl flex items-center gap-2">
+                    <i class="fa-brands fa-whatsapp"></i>Agendar
                 </a>
             </nav>
 
-            <!-- Menu Mobile -->
-            <button id="menu-btn" class="md:hidden text-vet-escuro text-2xl focus:outline-none">
+            <!-- Menu Mobile Button -->
+            <button id="menu-btn"
+                class="md:hidden text-vet-escuro text-2xl focus:outline-none hover:text-vet-claro transition-smooth">
                 <i class="fa-solid fa-bars"></i>
             </button>
         </div>
 
         <!-- Menu Dropdown Mobile -->
-        <div id="mobile-menu" class="hidden md:hidden bg-white border-t">
-            <a href="#sobre" class="block py-3 px-6 hover:bg-gray-100">Sobre</a>
-            <a href="#servicos" class="block py-3 px-6 hover:bg-gray-100">Serviços</a>
-            <a href="#depoimentos" class="block py-3 px-6 hover:bg-gray-100">Depoimentos</a>
-            <a href="#clinicas" class="block py-3 px-6 hover:bg-gray-100">Clínicas Parceiras</a>
-            <a href="#smart-pet" class="block py-3 px-6 hover:bg-gray-100 font-bold text-vet-claro">Smart Pet ✨</a>
-            <a href="https://wa.me/5584991743293" class="block py-3 px-6 bg-green-100 text-vet-escuro font-bold text-center">Agendar no WhatsApp</a>
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-t mobile-menu-slide">
+            <a href="#sobre" class="block py-3 px-6 hover:bg-gray-50 transition-smooth">Sobre</a>
+            <a href="#servicos" class="block py-3 px-6 hover:bg-gray-50 transition-smooth">Serviços</a>
+            <a href="#depoimentos" class="block py-3 px-6 hover:bg-gray-50 transition-smooth">Depoimentos</a>
+            <a href="#clinicas" class="block py-3 px-6 hover:bg-gray-50 transition-smooth">Clínicas Parceiras</a>
+            <a href="https://wa.me/5584991743293"
+                class="block py-4 px-6 bg-vet-escuro text-white font-bold text-center hover:bg-vet-claro transition-smooth">Agendar
+                no WhatsApp</a>
         </div>
     </header>
 
     <!-- =========================================
          HERO (BANNER PRINCIPAL)
     ========================================== -->
-    <section class="pt-32 pb-20 px-6 bg-gradient-to-b from-white to-vet-beige">
-        <div class="container mx-auto flex flex-col-reverse md:flex-row items-center gap-10">
-            
-            <!-- Texto -->
-            <div class="md:w-1/2 text-center md:text-left">
-                <span class="bg-green-100 text-vet-escuro px-3 py-1 rounded-full text-sm font-semibold mb-4 inline-block border border-green-200">
-                    <i class="fa-solid fa-location-dot mr-1"></i> Atendimento em Natal/RN
-                </span>
-                <h1 class="text-4xl md:text-5xl font-bold text-vet-escuro mb-6 leading-tight">
-                    Seu pet bem cuidado,<br>
-                    <span class="text-vet-claro">sem sair de casa</span>.
-                </h1>
-                <p class="text-lg text-gray-600 mb-8">
-                    Atendimento veterinário domiciliar humanizado. Evite o estresse do transporte e as filas de espera. O Dr. Rennê vai até você!
-                </p>
-                
-                <div class="flex flex-col md:flex-row gap-4 justify-center md:justify-start">
-                    <a href="https://wa.me/5584991743293" class="bg-vet-escuro text-white px-8 py-4 rounded-lg shadow-lg hover:bg-vet-claro transition text-lg font-bold flex items-center justify-center gap-2 transform hover:-translate-y-1">
-                        <i class="fa-brands fa-whatsapp"></i> Agendar Visita
-                    </a>
-                    <a href="#servicos" class="border-2 border-vet-escuro text-vet-escuro px-8 py-4 rounded-lg hover:bg-vet-escuro hover:text-white transition text-lg font-semibold flex items-center justify-center">
-                        Ver Serviços
-                    </a>
-                </div>
-                
-                <div class="mt-6 flex items-center justify-center md:justify-start gap-2 text-sm text-gray-500">
-                    <div class="flex text-yellow-400">
-                        <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
-                    </div>
-                    <span>Profissionalismo e Dedicação</span>
-                </div>
-            </div>
+    <section class="relative pt-24 md:pt-32 pb-20 md:pb-32 overflow-hidden">
+        <!-- Background com Overlay -->
+        <div class="absolute inset-0 z-0">
+            <img src="foto-com-pacientes4.jpeg" alt="Dr. Rennê Costa Veterinário"
+                class="w-full h-full object-cover object-center">
+            <div class="hero-overlay absolute inset-0"></div>
+        </div>
 
-            <!-- Imagem Principal -->
-            <div class="md:w-1/2 relative">
-                <img src="foto-com-pacientes4.jpeg" 
-                     alt="Dr. Rennê Costa Veterinário com Rough Collie" 
-                     class="rounded-2xl shadow-2xl w-full object-cover h-[400px] md:h-[700px] border-4 border-white">
-                
-                <!-- Selo Flutuante -->
-                <div class="absolute -bottom-6 -left-6 bg-white p-4 rounded-lg shadow-lg hidden md:block">
-                    <div class="flex items-center gap-3">
-                        <div class="bg-green-100 p-3 rounded-full text-vet-escuro">
-                            <i class="fa-solid fa-house-medical text-2xl"></i>
-                        </div>
-                        <div>
-                            <p class="font-bold text-vet-escuro">Veterinário Domiciliar</p>
-                            <p class="text-xs text-gray-500">Conforto & Segurança</p>
-                        </div>
+        <!-- Conteúdo -->
+        <div class="container mx-auto px-6 relative z-10">
+            <div class="max-w-3xl mx-auto text-center text-white fade-in">
+
+                <span
+                    class="bg-white/20 backdrop-blur-sm text-white px-4 py-2 rounded-full text-sm font-semibold mb-6 inline-block border border-white/30">
+                    <i class="fa-solid fa-location-dot mr-1"></i> Atendimento Premium em Natal/RN
+                </span>
+
+                <h1 class="text-4xl md:text-6xl font-serif font-bold mb-6 leading-tight">
+                    Dr. Rennê Costa
+                </h1>
+
+                <p class="text-lg md:text-xl text-white/90 mb-10 leading-relaxed max-w-2xl mx-auto">
+                    Atendimento domiciliar de excelência em Natal/RN. Seu pet merece cuidado personalizado, sem o
+                    estresse do deslocamento.
+                </p>
+
+                <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
+                    <a href="https://wa.me/5584991743293"
+                        class="bg-white text-vet-escuro px-8 py-4 rounded-full shadow-2xl hover:shadow-xl hover:scale-105 transition-smooth text-lg font-bold flex items-center justify-center gap-3 w-full sm:w-auto">
+                        <i class="fa-brands fa-whatsapp text-2xl"></i> Agendar Atendimento
+                    </a>
+                    <a href="#servicos"
+                        class="border-2 border-white text-white px-8 py-4 rounded-full hover:bg-white hover:text-vet-escuro transition-smooth text-lg font-semibold flex items-center justify-center w-full sm:w-auto">
+                        Nossos Serviços
+                    </a>
+                </div>
+
+                <div class="mt-8 flex items-center justify-center gap-2 text-white/90">
+                    <div class="flex text-yellow-300 text-lg">
+                        <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i
+                            class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i
+                            class="fa-solid fa-star"></i>
                     </div>
+                    <span class="font-medium">Excelência Comprovada por Clientes</span>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- =========================================
-         PROBLEMA / SOLUÇÃO
+         BENEFÍCIOS
     ========================================== -->
-    <section class="py-16 bg-white">
+    <section class="py-20 md:py-24 bg-white">
         <div class="container mx-auto px-6">
-            <div class="grid md:grid-cols-3 gap-8 text-center">
-                <div class="p-6 rounded-xl hover:shadow-lg transition border border-transparent hover:border-green-100">
-                    <div class="text-4xl text-vet-claro mb-4"><i class="fa-solid fa-heart-pulse"></i></div>
-                    <h3 class="text-xl font-bold mb-2 text-vet-escuro">Menos Estresse</h3>
-                    <p class="text-gray-600">Seu pet é atendido no território dele, reduzindo a ansiedade e o medo de clínicas.</p>
+            <div class="grid md:grid-cols-3 gap-8 md:gap-10">
+
+                <div class="card-premium p-8 rounded-2xl bg-white border border-gray-100 text-center fade-in">
+                    <div
+                        class="w-20 h-20 mx-auto mb-6 rounded-full bg-gradient-to-br from-vet-claro to-vet-escuro flex items-center justify-center">
+                        <i class="fa-solid fa-heart-pulse text-3xl text-white"></i>
+                    </div>
+                    <h3 class="text-2xl font-serif font-bold mb-3 text-vet-escuro">Ambiente Familiar</h3>
+                    <p class="text-gray-600 leading-relaxed">
+                        Atendimento no território do seu pet, eliminando a ansiedade do deslocamento e do ambiente
+                        clínico.
+                    </p>
                 </div>
-                <div class="p-6 rounded-xl hover:shadow-lg transition border border-transparent hover:border-green-100">
-                    <div class="text-4xl text-vet-claro mb-4"><i class="fa-solid fa-clock"></i></div>
-                    <h3 class="text-xl font-bold mb-2 text-vet-escuro">Praticidade</h3>
-                    <p class="text-gray-600">Sem trânsito, sem caixas de transporte e sem espera. Horário marcado para sua conveniência.</p>
+
+                <div class="card-premium p-8 rounded-2xl bg-white border border-gray-100 text-center fade-in"
+                    style="transition-delay: 0.1s;">
+                    <div
+                        class="w-20 h-20 mx-auto mb-6 rounded-full bg-gradient-to-br from-vet-claro to-vet-escuro flex items-center justify-center">
+                        <i class="fa-solid fa-clock text-3xl text-white"></i>
+                    </div>
+                    <h3 class="text-2xl font-serif font-bold mb-3 text-vet-escuro">Conveniência Total</h3>
+                    <p class="text-gray-600 leading-relaxed">
+                        Agenda flexível que se adapta à sua rotina. Sem trânsito, sem filas, sem complicações.
+                    </p>
                 </div>
-                <div class="p-6 rounded-xl hover:shadow-lg transition border border-transparent hover:border-green-100">
-                    <div class="text-4xl text-vet-claro mb-4"><i class="fa-solid fa-user-doctor"></i></div>
-                    <h3 class="text-xl font-bold mb-2 text-vet-escuro">Atenção Exclusiva</h3>
-                    <p class="text-gray-600">Consulta detalhada com tempo para tirar todas as suas dúvidas sobre a saúde do animal.</p>
+
+                <div class="card-premium p-8 rounded-2xl bg-white border border-gray-100 text-center fade-in"
+                    style="transition-delay: 0.2s;">
+                    <div
+                        class="w-20 h-20 mx-auto mb-6 rounded-full bg-gradient-to-br from-vet-claro to-vet-escuro flex items-center justify-center">
+                        <i class="fa-solid fa-user-doctor text-3xl text-white"></i>
+                    </div>
+                    <h3 class="text-2xl font-serif font-bold mb-3 text-vet-escuro">Atendimento Personalizado</h3>
+                    <p class="text-gray-600 leading-relaxed">
+                        Consulta individualizada com tempo dedicado para avaliar cada detalhe da saúde do seu
+                        companheiro.
+                    </p>
                 </div>
+
             </div>
         </div>
     </section>
@@ -194,43 +333,72 @@
     <!-- =========================================
          SERVIÇOS
     ========================================== -->
-    <section id="servicos" class="py-20 bg-vet-escuro text-white">
-        <div class="container mx-auto px-6">
-            <div class="text-center mb-12">
-                <h2 class="text-3xl md:text-4xl font-bold mb-4">Nossos Serviços</h2>
-                <p class="text-green-200 text-lg">O consultório veterinário vai até sua casa!</p>
+    <section id="servicos"
+        class="py-20 md:py-24 bg-gradient-to-br from-vet-escuro to-[#153d31] text-white relative overflow-hidden">
+        <!-- Pattern Decorativo -->
+        <div class="absolute inset-0 opacity-5">
+            <div class="absolute inset-0"
+                style="background-image: url('data:image/svg+xml,%3Csvg width=&quot;60&quot; height=&quot;60&quot; viewBox=&quot;0 0 60 60&quot; xmlns=&quot;http://www.w3.org/2000/svg&quot;%3E%3Cg fill=&quot;none&quot; fill-rule=&quot;evenodd&quot;%3E%3Cg fill=&quot;%23ffffff&quot; fill-opacity=&quot;1&quot;%3E%3Cpath d=&quot;M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z&quot;/%3E%3C/g%3E%3C/g%3E%3C/svg%3E');">
+            </div>
+        </div>
+
+        <div class="container mx-auto px-6 relative z-10">
+            <div class="text-center mb-16 fade-in">
+                <h2 class="text-4xl md:text-5xl font-serif font-bold mb-4">Serviços Oferecidos</h2>
+                <p class="text-green-100 text-lg md:text-xl max-w-2xl mx-auto">
+                    Consultório veterinário completo no conforto da sua residência
+                </p>
             </div>
 
-            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-                <!-- Card Serviço -->
-                <div class="bg-white/10 p-6 rounded-lg backdrop-blur-sm hover:bg-white/20 transition border border-white/10">
-                    <i class="fa-solid fa-stethoscope text-3xl text-vet-claro mb-4"></i>
-                    <h3 class="text-xl font-bold mb-2">Consulta e Tratamento</h3>
-                    <p class="text-sm text-gray-200">Avaliação clínica completa para cães e gatos, diagnóstico de condições clínicas, aplicação de medicação e tratamento.</p>
+            <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
+
+                <!-- Card Serviço 1 -->
+                <div class="glass-card p-8 rounded-2xl hover:bg-white/20 transition-smooth fade-in">
+                    <i class="fa-solid fa-stethoscope text-4xl text-vet-claro mb-6 block"></i>
+                    <h3 class="text-xl font-bold mb-3 font-serif">Consulta Clínica</h3>
+                    <p class="text-sm text-gray-100 leading-relaxed">
+                        Avaliação completa do estado de saúde, diagnóstico de condições clínicas e prescrição de
+                        tratamentos adequados.
+                    </p>
                 </div>
-                <!-- Card Serviço -->
-                <div class="bg-white/10 p-6 rounded-lg backdrop-blur-sm hover:bg-white/20 transition border border-white/10">
-                    <i class="fa-solid fa-syringe text-3xl text-vet-claro mb-4"></i>
-                    <h3 class="text-xl font-bold mb-2">Vacinação</h3>
-                    <p class="text-sm text-gray-200">Vacinas importadas (V8/V10, Raiva, V5/V4 felina) com controle rigoroso.</p>
+
+                <!-- Card Serviço 2 -->
+                <div class="glass-card p-8 rounded-2xl hover:bg-white/20 transition-smooth fade-in"
+                    style="transition-delay: 0.1s;">
+                    <i class="fa-solid fa-syringe text-4xl text-vet-claro mb-6 block"></i>
+                    <h3 class="text-xl font-bold mb-3 font-serif">Vacinação Premium</h3>
+                    <p class="text-sm text-gray-100 leading-relaxed">
+                        Vacinas importadas de alta qualidade (V8/V10, Raiva, V5/V4 felina) com protocolo rigoroso de
+                        conservação.
+                    </p>
                 </div>
-                <!-- Card Serviço -->
-                <div class="bg-white/10 p-6 rounded-lg backdrop-blur-sm hover:bg-white/20 transition border border-white/10">
-                    <i class="fa-solid fa-flask text-3xl text-vet-claro mb-4"></i>
-                    <h3 class="text-xl font-bold mb-2">Exames</h3>
-                    <p class="text-sm text-gray-200">Coleta de amostras para análise laboratorial e exames complementares.</p>
+
+                <!-- Card Serviço 3 -->
+                <div class="glass-card p-8 rounded-2xl hover:bg-white/20 transition-smooth fade-in"
+                    style="transition-delay: 0.2s;">
+                    <i class="fa-solid fa-flask text-4xl text-vet-claro mb-6 block"></i>
+                    <h3 class="text-xl font-bold mb-3 font-serif">Exames Laboratoriais</h3>
+                    <p class="text-sm text-gray-100 leading-relaxed">
+                        Coleta profissional de amostras para análises laboratoriais e diagnóstico preciso.
+                    </p>
                 </div>
-                <!-- Card Serviço -->
-                <div class="bg-white/10 p-6 rounded-lg backdrop-blur-sm hover:bg-white/20 transition border border-white/10">
-                    <i class="fa-solid fa-pills text-3xl text-vet-claro mb-4"></i>
-                    <h3 class="text-xl font-bold mb-2">Atestado de Viagem</h3>
-                    <p class="text-sm text-gray-200">Emissão de documentos (GTA) para viagens nacionais e internacionais seguras e sem surpresas.</p>
+
+                <!-- Card Serviço 4 -->
+                <div class="glass-card p-8 rounded-2xl hover:bg-white/20 transition-smooth fade-in"
+                    style="transition-delay: 0.3s;">
+                    <i class="fa-solid fa-passport text-4xl text-vet-claro mb-6 block"></i>
+                    <h3 class="text-xl font-bold mb-3 font-serif">Atestado de Viagem</h3>
+                    <p class="text-sm text-gray-100 leading-relaxed">
+                        Emissão de CVI/GTA para viagens nacionais e internacionais com toda documentação necessária.
+                    </p>
                 </div>
+
             </div>
-            
-            <div class="text-center mt-12">
-                <a href="https://wa.me/5584991743293" class="bg-vet-claro text-white px-8 py-3 rounded-full font-bold hover:bg-green-500 transition inline-block shadow-lg">
-                    <i class="fa-brands fa-whatsapp mr-2"></i> Agende sua consulta!
+
+            <div class="text-center fade-in">
+                <a href="https://wa.me/5584991743293"
+                    class="inline-flex items-center gap-3 bg-white text-vet-escuro px-10 py-4 rounded-full font-bold text-lg hover:bg-vet-claro hover:text-white transition-smooth shadow-2xl hover:shadow-xl hover:scale-105">
+                    <i class="fa-brands fa-whatsapp text-2xl"></i> Solicitar Orçamento
                 </a>
             </div>
         </div>
@@ -239,34 +407,81 @@
     <!-- =========================================
          SOBRE O DR. RENNÊ
     ========================================== -->
-    <section id="sobre" class="py-20 bg-vet-beige">
-        <div class="container mx-auto px-6 flex flex-col md:flex-row items-center gap-12">
-            <div class="md:w-1/2">
-                <img src="perfil-2.jpeg" 
-                     alt="Dr. Rennê Costa Veterinário" 
-                     class="rounded-lg shadow-xl w-full h-[750px] object-cover border-4 border-white">
-            </div>
-            <div class="md:w-1/2">
-                <h2 class="text-3xl md:text-4xl font-bold text-vet-escuro mb-4">Conheça o Profissional</h2>
-                <h3 class="text-xl text-vet-claro font-bold mb-4">Dr. Rennê Costa <span class="text-sm text-gray-500 font-normal"><a href="https://app.cfmv.gov.br/paginas/busca" target="_blank">(CRMV-RN 2089)</a></span></h3>
-                
-                <p class="text-gray-600 mb-4 leading-relaxed">
-                    Olá! Sou Médico Veterinário, especializado em Clínica Médica de Pequenos Animais atuante em Natal/RN. Minha missão é proporcionar saúde e qualidade de vida aos animais, oferecendo um atendimento ético e acessível diretamente na sua casa.
-                </p>
-                <p class="text-gray-600 mb-6 leading-relaxed">
-                    Entendo a correria do dia a dia e a dificuldade de transportar animais. Por isso, levo todo o equipamento necessário para realizar um atendimento seguro no conforto do seu lar.
-                </p>
-                
-                <div class="grid grid-cols-2 gap-4 text-sm text-gray-700 mb-8">
-                    <div class="flex items-center"><i class="fa-solid fa-check-circle text-vet-claro mr-2"></i> Atendimento em Domicílio</div>
-                    <div class="flex items-center"><i class="fa-solid fa-check-circle text-vet-claro mr-2"></i> Vacinas Importadas</div>
-                    <div class="flex items-center"><i class="fa-solid fa-check-circle text-vet-claro mr-2"></i> CRMV Ativo</div>
-                    <div class="flex items-center"><i class="fa-solid fa-check-circle text-vet-claro mr-2"></i> Amor incondicional pelos Animais</div>
+    <section id="sobre" class="py-20 md:py-24 bg-vet-beige">
+        <div class="container mx-auto px-6">
+            <div class="flex flex-col lg:flex-row items-center gap-12 lg:gap-16">
+
+                <div class="w-full lg:w-1/2 fade-in">
+                    <div class="relative">
+                        <img src="perfil-2.jpeg" alt="Dr. Rennê Costa Veterinário"
+                            class="rounded-3xl shadow-2xl w-full aspect-[3/4] object-cover border-8 border-white">
+                        <!-- Badge Flutuante -->
+                        <div class="absolute -bottom-6 -right-6 bg-white p-6 rounded-2xl shadow-xl hidden lg:block">
+                            <div class="flex items-center gap-3">
+                                <div class="bg-gradient-to-br from-vet-claro to-vet-escuro p-4 rounded-xl text-white">
+                                    <i class="fa-solid fa-certificate text-3xl"></i>
+                                </div>
+                                <div>
+                                    <p class="font-bold text-vet-escuro text-lg">CRMV Ativo</p>
+                                    <p class="text-xs text-gray-500">Registro Profissional</p>
+                                    <p class="text-xs text-gray-500">CRMV-RN 2089</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
 
-                <a href="https://wa.me/5584991743293" class="text-vet-escuro font-bold hover:text-vet-claro underline">
-                    Fale comigo agora! &rarr;
-                </a>
+                <div class="w-full lg:w-1/2 fade-in">
+                    <h2 class="text-4xl md:text-5xl font-serif font-bold text-vet-escuro mb-4">
+                        Excelência em Medicina Veterinária
+                    </h2>
+                    <h3 class="text-2xl text-vet-claro font-bold mb-6">
+                        Dr. Rennê Costa
+                        <span class="text-base text-gray-500 font-normal">
+                            <a href="https://app.cfmv.gov.br/paginas/busca" target="_blank"
+                                class="hover:text-vet-claro transition-smooth">(CRMV-RN 2089)</a>
+                        </span>
+                    </h3>
+
+                    <div class="space-y-5 text-gray-700 leading-relaxed mb-8">
+                        <p>
+                            Com formação especializada em Clínica Médica de Pequenos Animais e anos de experiência,
+                            minha missão é proporcionar cuidado veterinário de alto padrão no ambiente mais confortável
+                            para o seu pet: o próprio lar.
+                        </p>
+                        <p>
+                            Compreendo que cada animal é único, assim como cada família. Por isso, ofereço atendimento
+                            personalizado, levando equipamentos profissionais e expertise clínica diretamente até você,
+                            sem comprometer a qualidade do serviço.
+                        </p>
+                    </div>
+
+                    <div class="grid grid-cols-2 gap-4 mb-8">
+                        <div class="flex items-center gap-3">
+                            <i class="fa-solid fa-check-circle text-vet-claro text-xl"></i>
+                            <span class="text-gray-700 font-medium">Atendimento Domiciliar</span>
+                        </div>
+                        <div class="flex items-center gap-3">
+                            <i class="fa-solid fa-check-circle text-vet-claro text-xl"></i>
+                            <span class="text-gray-700 font-medium">Vacinas Importadas</span>
+                        </div>
+                        <div class="flex items-center gap-3">
+                            <i class="fa-solid fa-check-circle text-vet-claro text-xl"></i>
+                            <span class="text-gray-700 font-medium">CRMV Regularizado</span>
+                        </div>
+                        <div class="flex items-center gap-3">
+                            <i class="fa-solid fa-check-circle text-vet-claro text-xl"></i>
+                            <span class="text-gray-700 font-medium">Dedicação aos Animais</span>
+                        </div>
+                    </div>
+
+                    <a href="https://wa.me/5584991743293"
+                        class="inline-flex items-center gap-2 text-vet-escuro font-bold text-lg hover:text-vet-claro transition-smooth group">
+                        Agende sua consulta
+                        <i class="fa-solid fa-arrow-right group-hover:translate-x-2 transition-smooth"></i>
+                    </a>
+                </div>
+
             </div>
         </div>
     </section>
@@ -274,148 +489,200 @@
     <!-- =========================================
          DEPOIMENTOS (PROVA SOCIAL)
     ========================================== -->
-    <section id="depoimentos" class="py-20 bg-white">
-        <div class="container mx-auto px-6 text-center">
-            <h2 class="text-3xl font-bold text-vet-escuro mb-12">O que dizem os responsáveis</h2>
-            
-            <div class="grid md:grid-cols-3 gap-8">
+    <section id="depoimentos" class="py-20 md:py-24 bg-white">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16 fade-in">
+                <h2 class="text-4xl md:text-5xl font-serif font-bold text-vet-escuro mb-4">
+                    Depoimentos de Clientes
+                </h2>
+                <p class="text-gray-600 text-lg">
+                    A confiança dos tutores é nossa maior conquista
+                </p>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-8 mb-12">
+
                 <!-- Depoimento 1 -->
-                <div class="bg-gray-50 p-8 rounded-xl shadow-sm border-t-4 border-vet-claro">
-                    <div class="w-24 h-24 mx-auto rounded-full overflow-hidden mb-4 border-2 border-vet-claro">
-                        <img src="foto-com-pacientes1.jpeg" alt="Pet do Tutor (Whippet)" class="object-cover w-full h-full">
+                <div class="card-premium bg-white p-8 rounded-2xl border-b-4 border-vet-claro fade-in">
+                    <div class="quote-mark mb-4">"</div>
+                    <div
+                        class="w-20 h-20 mx-auto rounded-full overflow-hidden mb-6 border-4 border-vet-claro shadow-lg">
+                        <img src="foto-com-pacientes1.jpeg" alt="Pet do Tutor" class="object-cover w-full h-full">
                     </div>
                     <div class="flex justify-center mb-4 text-yellow-400">
-                        <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i
+                            class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i
+                            class="fa-solid fa-star"></i>
                     </div>
-                    <p class="text-gray-600 italic mb-6">"Rennê é um veterinário que atende com muito amor e empatia nossos pets, tive a experiência com ele em que meu cachorro estava precisando de um atendimento e a clínica já estava fechando, porém o mesmo prontamente ficou lá esperando eu chegar e meu pet ser atendido. Sabe cativar não só o pet mas também os tutores. Excepcional!"</p>
-                    <div class="font-bold text-vet-escuro">- Leandro Gomes</div>
+                    <p class="text-gray-600 italic mb-6 leading-relaxed">
+                        "Rennê é um veterinário que atende com muito amor e empatia nossos pets, tive a experiência com
+                        ele em que meu cachorro estava precisando de um atendimento e a clínica já estava fechando,
+                        porém o mesmo prontamente ficou lá esperando eu chegar e meu pet ser atendido. Sabe cativar não
+                        só o pet mas também os tutores. Excepcional!"
+                    </p>
+                    <div class="font-bold text-vet-escuro">— Leandro Gomes</div>
                 </div>
 
                 <!-- Depoimento 2 -->
-                <div class="bg-gray-50 p-8 rounded-xl shadow-sm border-t-4 border-vet-claro">
-                    <div class="w-24 h-24 mx-auto rounded-full overflow-hidden mb-4 border-2 border-vet-claro">
-                        <img src="foto-com-pacientes2.jpeg" alt="Pet do Tutor (Dachshund)" class="object-cover w-full h-full">
+                <div class="card-premium bg-white p-8 rounded-2xl border-b-4 border-vet-claro fade-in"
+                    style="transition-delay: 0.1s;">
+                    <div class="quote-mark mb-4">"</div>
+                    <div
+                        class="w-20 h-20 mx-auto rounded-full overflow-hidden mb-6 border-4 border-vet-claro shadow-lg">
+                        <img src="foto-com-pacientes2.jpeg" alt="Pet do Tutor" class="object-cover w-full h-full">
                     </div>
                     <div class="flex justify-center mb-4 text-yellow-400">
-                        <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i
+                            class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i
+                            class="fa-solid fa-star"></i>
                     </div>
-                    <p class="text-gray-600 italic mb-6">"Adorei o atendimento com Dr Rennê super atencioso e cuidadoso com meu Dudu. Tirou todas as minhas dúvidas com muita delicadeza. Super recomendo!"</p>
-                    <div class="font-bold text-vet-escuro">- Aline Costa</div>
+                    <p class="text-gray-600 italic mb-6 leading-relaxed">
+                        "Adorei o atendimento com Dr Rennê super atencioso e cuidadoso com meu Dudu. Tirou todas as
+                        minhas dúvidas com muita delicadeza. Super recomendo!"
+                    </p>
+                    <div class="font-bold text-vet-escuro">— Aline Costa</div>
                 </div>
 
                 <!-- Depoimento 3 -->
-                <div class="bg-gray-50 p-8 rounded-xl shadow-sm border-t-4 border-vet-claro">
-                    <div class="w-24 h-24 mx-auto rounded-full overflow-hidden mb-4 border-2 border-vet-claro">
+                <div class="card-premium bg-white p-8 rounded-2xl border-b-4 border-vet-claro fade-in"
+                    style="transition-delay: 0.2s;">
+                    <div class="quote-mark mb-4">"</div>
+                    <div
+                        class="w-20 h-20 mx-auto rounded-full overflow-hidden mb-6 border-4 border-vet-claro shadow-lg">
                         <img src="foto-com-pacientes3.jpeg" alt="Pet do Tutor" class="object-cover w-full h-full">
                     </div>
                     <div class="flex justify-center mb-4 text-yellow-400">
-                        <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i
+                            class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i
+                            class="fa-solid fa-star"></i>
                     </div>
-                    <p class="text-gray-600 italic mb-6">"Não tenho palavras para expressar o quanto Dr renne é maravilhoso, veterinario atencioso a todos os detalhes de sintomas do pet, carinhoso e cuidadoso. Adotamos para cuidar de todos os pets da nossa familia."</p>
-                    <div class="font-bold text-vet-escuro">- Mayara Cavalcanti</div>
+                    <p class="text-gray-600 italic mb-6 leading-relaxed">
+                        "Não tenho palavras para expressar o quanto Dr renne é maravilhoso, veterinario atencioso a
+                        todos os detalhes de sintomas do pet, carinhoso e cuidadoso. Adotamos para cuidar de todos os
+                        pets da nossa familia."
+                    </p>
+                    <div class="font-bold text-vet-escuro">— Mayara Cavalcanti</div>
                 </div>
+
             </div>
-                <!-- Botão Ver Mais Depoimentos -->
-                <div class="mt-12">
-                    <a href="https://maps.app.goo.gl/A3J9yorQFj7U82oB9" target="_blank" class="bg-white border-2 border-vet-escuro text-vet-escuro px-8 py-3 rounded-full font-bold hover:bg-vet-escuro hover:text-white transition inline-flex items-center gap-2 shadow-sm">
-                        <i class="fa-brands fa-google"></i> Veja mais depoimentos
-                    </a>
-                </div>
+
+            <!-- Botão Ver Mais Depoimentos -->
+            <div class="text-center fade-in">
+                <a href="https://maps.app.goo.gl/A3J9yorQFj7U82oB9" target="_blank"
+                    class="inline-flex items-center gap-3 bg-white border-2 border-vet-escuro text-vet-escuro px-8 py-4 rounded-full font-bold hover:bg-vet-escuro hover:text-white transition-smooth shadow-lg hover:shadow-xl">
+                    <i class="fa-brands fa-google text-xl"></i> Veja mais avaliações
+                </a>
+            </div>
         </div>
     </section>
-
-    <!-- =========================================
-         NOVA SEÇÃO: ESPAÇO SMART PET (GEMINI API) 
-    (Removido para exitar exposição desnecessária de api)
-    ========================================== -->
 
     <!-- =========================================
          INSTAGRAM (@rennevet)
     ========================================== -->
-    <section class="py-16 bg-vet-beige border-t border-vet-escuro/10">
-        <div class="container mx-auto px-6 text-center">
-            <h2 class="text-2xl md:text-3xl font-bold text-vet-escuro mb-8 flex items-center justify-center gap-2">
-                <i class="fa-brands fa-instagram text-vet-amarelo"></i> Siga para mais dicas
-            </h2>
-            
-            <!-- Cartão Estilo Instagram (Simulação de Embed) -->
-            <div class="max-w-md mx-auto bg-white rounded-xl shadow-lg border border-vet-escuro/10 overflow-hidden hover:shadow-xl transition transform hover:-translate-y-1">
-                <!-- Cabeçalho do Perfil -->
-                <div class="p-6 flex items-center gap-4">
-                    <div class="w-16 h-16 rounded-full p-[2px] bg-gradient-to-tr from-yellow-400 via-red-500 to-purple-500">
-                        <div class="bg-white w-full h-full rounded-full p-1 overflow-hidden">
-                            <img src="perfil-3.jpeg" alt="Profile" class="w-full h-full object-contain rounded-full">
+    <section class="py-20 bg-gradient-to-b from-vet-beige to-white border-t border-gray-100">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-12 fade-in">
+                <h2
+                    class="text-3xl md:text-4xl font-serif font-bold text-vet-escuro mb-3 flex items-center justify-center gap-3">
+                    <i class="fa-brands fa-instagram text-pink-500"></i> Siga no Instagram
+                </h2>
+                <p class="text-gray-600">Dicas e conteúdos sobre saúde animal</p>
+            </div>
+
+            <!-- Card Instagram -->
+            <div
+                class="max-w-md mx-auto bg-white rounded-3xl shadow-2xl overflow-hidden hover:shadow-xl transition-smooth fade-in">
+                <!-- Header do Perfil -->
+                <div class="p-6 flex items-center gap-4 border-b border-gray-100">
+                    <div
+                        class="w-16 h-16 rounded-full p-[3px] bg-gradient-to-tr from-yellow-400 via-pink-500 to-purple-600">
+                        <div class="bg-white w-full h-full rounded-full p-[3px] overflow-hidden">
+                            <img src="perfil-3.jpeg" alt="@rennevet" class="w-full h-full object-cover rounded-full">
                         </div>
                     </div>
-                    <div class="text-left flex-1">
+                    <div class="flex-1 text-left">
                         <h3 class="font-bold text-vet-escuro text-lg">@rennevet</h3>
-                        <p class="text-xs text-gray-500">Dr. Rennê Costa • Médico Veterinário</p>
+                        <p class="text-xs text-gray-500">Dr. Rennê Costa</p>
                     </div>
-                    <div>
-                         <a href="https://www.instagram.com/rennevet/" target="_blank" class="bg-vet-escuro text-white px-5 py-2 rounded-lg text-sm font-bold hover:bg-vet-claro transition cursor-pointer">
-                            Seguir
-                        </a>
+                    <a href="https://www.instagram.com/rennevet/" target="_blank"
+                        class="bg-vet-escuro text-white px-6 py-2 rounded-lg text-sm font-bold hover:bg-vet-claro transition-smooth">
+                        Seguir
+                    </a>
+                </div>
+
+                <!-- Grid de Fotos -->
+                <div class="grid grid-cols-3 gap-1 bg-gray-100">
+                    <div class="aspect-square overflow-hidden relative group">
+                        <img src="foto-com-pacientes5.jpeg"
+                            class="w-full h-full object-cover group-hover:scale-110 transition-smooth">
+                    </div>
+                    <div class="aspect-square overflow-hidden relative group">
+                        <img src="foto-com-pacientes6.jpeg"
+                            class="w-full h-full object-cover group-hover:scale-110 transition-smooth">
+                    </div>
+                    <div class="aspect-square overflow-hidden relative group">
+                        <img src="foto-com-pacientes3.jpeg"
+                            class="w-full h-full object-cover group-hover:scale-110 transition-smooth">
                     </div>
                 </div>
-                
-                <!-- Grid de Fotos (Simulação do Feed) -->
-                <div class="grid grid-cols-3 gap-0.5 bg-gray-100 border-t border-b border-gray-100">
-                    <div class="aspect-square bg-gray-200 overflow-hidden relative group">
-                        <img src="foto-com-pacientes5.jpeg" class="w-full h-full object-cover group-hover:opacity-90 transition">
-                    </div>
-                    <div class="aspect-square bg-gray-200 overflow-hidden relative group">
-                        <img src="foto-com-pacientes6.jpeg" class="w-full h-full object-cover group-hover:opacity-90 transition">
-                    </div>
-                    <div class="aspect-square bg-gray-200 overflow-hidden relative group">
-                        <img src="foto-com-pacientes3.jpeg" class="w-full h-full object-cover group-hover:opacity-90 transition">
-                    </div>
-                </div>
-                
-                <!-- Rodapé do Cartão -->
-                <div class="p-4 text-center bg-gray-50">
-                    <a href="https://www.instagram.com/rennevet/" target="_blank" class="text-vet-claro text-sm font-bold hover:text-vet-escuro flex items-center justify-center gap-1">
-                        Ver mais publicações <i class="fa-solid fa-arrow-right text-xs ml-1"></i>
+
+                <!-- Footer -->
+                <div class="p-4 text-center bg-gray-50 border-t border-gray-100">
+                    <a href="https://www.instagram.com/rennevet/" target="_blank"
+                        class="text-vet-claro text-sm font-bold hover:text-vet-escuro inline-flex items-center gap-2 transition-smooth">
+                        Ver mais publicações
+                        <i class="fa-solid fa-arrow-right text-xs"></i>
                     </a>
                 </div>
             </div>
-
         </div>
     </section>
 
     <!-- =========================================
-         NOVA SEÇÃO: CLÍNICAS PARCEIRAS
+         CLÍNICAS PARCEIRAS
     ========================================== -->
-    <section id="clinicas" class="py-16 bg-white border-t border-gray-100">
-        <div class="container mx-auto px-6 text-center">
-            <h2 class="text-3xl font-bold text-vet-escuro mb-4">Atendimento em Clínica</h2>
-            <p class="text-lg text-gray-600 mb-10 max-w-2xl mx-auto">
-                Prefere levar seu pet até o consultório? Também atendo em horários agendados nas clínicas parceiras abaixo.
-            </p>
+    <section id="clinicas" class="py-20 md:py-24 bg-white border-t border-gray-100">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16 fade-in">
+                <h2 class="text-4xl md:text-5xl font-serif font-bold text-vet-escuro mb-4">
+                    Atendimento em Clínica
+                </h2>
+                <p class="text-lg text-gray-600 max-w-2xl mx-auto">
+                    Prefere levar seu pet até o consultório? Também realizo atendimentos presenciais com hora marcada
+                    nas clínicas parceiras.
+                </p>
+            </div>
 
-            <div class="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
-                
+            <div class="grid md:grid-cols-2 gap-8 md:gap-12 max-w-4xl mx-auto">
+
                 <!-- Clínica 1: Animalerie -->
-                <div class="bg-gray-50 p-8 rounded-xl shadow-md border border-gray-200 hover:border-vet-claro transition flex flex-col items-center">
-                    <div class="bg-vet-escuro text-white w-16 h-16 rounded-full flex items-center justify-center text-2xl mb-4 shadow-lg">
+                <div
+                    class="card-premium bg-gradient-to-br from-white to-gray-50 p-10 rounded-3xl border border-gray-200 flex flex-col items-center text-center fade-in">
+                    <div
+                        class="bg-gradient-to-br from-vet-escuro to-vet-claro text-white w-20 h-20 rounded-2xl flex items-center justify-center text-3xl mb-6 shadow-xl">
                         <i class="fa-solid fa-hospital"></i>
                     </div>
-                    <h3 class="text-xl font-bold text-vet-escuro mb-2">Clínica Animalerie</h3>
-                    <p class="text-sm text-gray-500 mb-6">Rua São José - Lagoa Nova</p>
-                    
-                    <a href="https://maps.app.goo.gl/WCQ1E7s9gVeDD8U97" target="_blank" class="bg-white border-2 border-vet-escuro text-vet-escuro hover:bg-vet-escuro hover:text-white font-bold py-2 px-6 rounded-full transition flex items-center gap-2">
+                    <h3 class="text-2xl font-serif font-bold text-vet-escuro mb-2">Clínica Animalerie</h3>
+                    <p class="text-sm text-gray-500 mb-6">Rua São José - Lagoa Nova, Natal/RN</p>
+
+                    <a href="https://maps.app.goo.gl/WCQ1E7s9gVeDD8U97" target="_blank"
+                        class="inline-flex items-center gap-3 bg-white border-2 border-vet-escuro text-vet-escuro hover:bg-vet-escuro hover:text-white font-bold py-3 px-8 rounded-full transition-smooth shadow-lg hover:shadow-xl">
                         <i class="fa-solid fa-map-location-dot"></i> Ver Localização
                     </a>
                 </div>
 
                 <!-- Clínica 2: Amo Patas -->
-                <div class="bg-gray-50 p-8 rounded-xl shadow-md border border-gray-200 hover:border-vet-claro transition flex flex-col items-center">
-                    <div class="bg-vet-claro text-white w-16 h-16 rounded-full flex items-center justify-center text-2xl mb-4 shadow-lg">
+                <div class="card-premium bg-gradient-to-br from-white to-gray-50 p-10 rounded-3xl border border-gray-200 flex flex-col items-center text-center fade-in"
+                    style="transition-delay: 0.1s;">
+                    <div
+                        class="bg-gradient-to-br from-vet-claro to-green-600 text-white w-20 h-20 rounded-2xl flex items-center justify-center text-3xl mb-6 shadow-xl">
                         <i class="fa-solid fa-paw"></i>
                     </div>
-                    <h3 class="text-xl font-bold text-vet-escuro mb-2">Clínica Amo Patas</h3>
-                    <p class="text-sm text-gray-500 mb-6">Av. Pôrto de Pedras - Neópolis</p>
-                    
-                    <a href="https://maps.app.goo.gl/KRrWtvCpsm4Uwjwg7" target="_blank" class="bg-white border-2 border-vet-escuro text-vet-escuro hover:bg-vet-escuro hover:text-white font-bold py-2 px-6 rounded-full transition flex items-center gap-2">
+                    <h3 class="text-2xl font-serif font-bold text-vet-escuro mb-2">Clínica Amo Patas</h3>
+                    <p class="text-sm text-gray-500 mb-6">Av. Pôrto de Pedras - Neópolis, Natal/RN</p>
+
+                    <a href="https://maps.app.goo.gl/KRrWtvCpsm4Uwjwg7" target="_blank"
+                        class="inline-flex items-center gap-3 bg-white border-2 border-vet-escuro text-vet-escuro hover:bg-vet-escuro hover:text-white font-bold py-3 px-8 rounded-full transition-smooth shadow-lg hover:shadow-xl">
                         <i class="fa-solid fa-map-location-dot"></i> Ver Localização
                     </a>
                 </div>
@@ -425,35 +692,60 @@
     </section>
 
     <!-- =========================================
-         FAQ RAPIDO
+         FAQ
     ========================================== -->
-    <section id="faq" class="py-16 bg-vet-beige">
-        <div class="container mx-auto px-6 max-w-3xl">
-            <h2 class="text-3xl font-bold text-vet-escuro text-center mb-10">Dúvidas Comuns</h2>
-            
+    <section id="faq" class="py-20 md:py-24 bg-vet-beige">
+        <div class="container mx-auto px-6 max-w-4xl">
+            <div class="text-center mb-16 fade-in">
+                <h2 class="text-4xl md:text-5xl font-serif font-bold text-vet-escuro mb-4">
+                    Perguntas Frequentes
+                </h2>
+                <p class="text-gray-600 text-lg">Tire suas dúvidas sobre o atendimento</p>
+            </div>
+
             <div class="space-y-4">
-                <details class="bg-white p-4 rounded-lg cursor-pointer group border-l-4 border-vet-claro shadow-sm hover:shadow-md transition">
-                    <summary class="font-bold text-vet-escuro flex justify-between items-center list-none">
+                <details
+                    class="card-premium bg-white p-6 rounded-2xl cursor-pointer group border-l-4 border-vet-claro fade-in">
+                    <summary class="font-bold text-vet-escuro flex justify-between items-center list-none text-lg">
                         Em quais bairros de Natal você atende?
-                        <span class="transition group-open:rotate-180"><i class="fa-solid fa-chevron-down"></i></span>
+                        <span class="transition-smooth group-open:rotate-180 text-vet-claro">
+                            <i class="fa-solid fa-chevron-down"></i>
+                        </span>
                     </summary>
-                    <p class="mt-3 text-gray-600">Atendo a maioria dos bairros de Natal e Parnamirim. Entre em contato pelo WhatsApp informando seu endereço para verificar a disponibilidade e taxa de deslocamento.</p>
+                    <p class="mt-4 text-gray-600 leading-relaxed">
+                        Atendo a maioria dos bairros de Natal e Parnamirim. Entre em contato pelo WhatsApp informando
+                        seu endereço para verificar a disponibilidade e taxa de deslocamento.
+                    </p>
                 </details>
 
-                <details class="bg-white p-4 rounded-lg cursor-pointer group border-l-4 border-vet-claro shadow-sm hover:shadow-md transition">
-                    <summary class="font-bold text-vet-escuro flex justify-between items-center list-none">
+                <details
+                    class="card-premium bg-white p-6 rounded-2xl cursor-pointer group border-l-4 border-vet-claro fade-in"
+                    style="transition-delay: 0.1s;">
+                    <summary class="font-bold text-vet-escuro flex justify-between items-center list-none text-lg">
                         Como agendar uma consulta?
-                        <span class="transition group-open:rotate-180"><i class="fa-solid fa-chevron-down"></i></span>
+                        <span class="transition-smooth group-open:rotate-180 text-vet-claro">
+                            <i class="fa-solid fa-chevron-down"></i>
+                        </span>
                     </summary>
-                    <p class="mt-3 text-gray-600">É muito simples! Basta clicar no botão do WhatsApp aqui no site ou salvar o número (84) 99174-3293. Responderei o mais breve possível para combinarmos o horário.</p>
+                    <p class="mt-4 text-gray-600 leading-relaxed">
+                        É muito simples! Basta clicar no botão do WhatsApp aqui no site ou salvar o número (84)
+                        99174-3293. Responderei o mais breve possível para combinarmos o horário.
+                    </p>
                 </details>
 
-                 <details class="bg-white p-4 rounded-lg cursor-pointer group border-l-4 border-vet-claro shadow-sm hover:shadow-md transition">
-                    <summary class="font-bold text-vet-escuro flex justify-between items-center list-none">
+                <details
+                    class="card-premium bg-white p-6 rounded-2xl cursor-pointer group border-l-4 border-vet-claro fade-in"
+                    style="transition-delay: 0.2s;">
+                    <summary class="font-bold text-vet-escuro flex justify-between items-center list-none text-lg">
                         Quais as formas de pagamento?
-                        <span class="transition group-open:rotate-180"><i class="fa-solid fa-chevron-down"></i></span>
+                        <span class="transition-smooth group-open:rotate-180 text-vet-claro">
+                            <i class="fa-solid fa-chevron-down"></i>
+                        </span>
                     </summary>
-                    <p class="mt-3 text-gray-600">Aceito PIX, dinheiro em espécie e cartões de débito/crédito. O pagamento é feito ao final do atendimento.</p>
+                    <p class="mt-4 text-gray-600 leading-relaxed">
+                        Aceito PIX, dinheiro em espécie e cartões de débito/crédito. O pagamento é feito ao final do
+                        atendimento.
+                    </p>
                 </details>
             </div>
         </div>
@@ -462,55 +754,77 @@
     <!-- =========================================
          RODAPÉ (FOOTER)
     ========================================== -->
-    <footer class="bg-vet-escuro text-white pt-16 pb-8 border-t-4 border-vet-claro">
+    <footer class="bg-gradient-to-br from-vet-escuro to-[#153d31] text-white pt-20 pb-8 border-t-4 border-vet-claro">
         <div class="container mx-auto px-6">
-            <div class="grid md:grid-cols-3 gap-8 mb-12">
+            <div class="grid md:grid-cols-3 gap-12 mb-12">
+
                 <!-- Coluna 1 -->
                 <div>
-                    <h4 class="text-xl font-bold mb-4 flex items-center gap-2">
+                    <h4 class="text-2xl font-serif font-bold mb-4 flex items-center gap-2">
                         <i class="fa-solid fa-paw text-vet-claro"></i> Dr. Rennê Costa
                     </h4>
-                    <p class="text-gray-300 text-sm leading-relaxed">
-                        Serviço veterinário domiciliar focado no bem-estar animal e na comodidade do responsável. Atendendo Natal/RN com excelência.
+                    <p class="text-gray-300 leading-relaxed">
+                        Serviço veterinário domiciliar premium focado no bem-estar animal e na comodidade do
+                        responsável. Atendendo Natal/RN com excelência.
                     </p>
                 </div>
+
                 <!-- Coluna 2 -->
                 <div>
-                    <h4 class="text-xl font-bold mb-4">Contato</h4>
-                    <ul class="space-y-3 text-gray-300">
-                        <li class="flex items-center">
-                            <i class="fa-brands fa-whatsapp text-green-400 w-6"></i> 
-                            <a href="https://wa.me/5584991743293" class="hover:text-white">(84) 99174-3293</a>
+                    <h4 class="text-xl font-bold mb-6">Contato</h4>
+                    <ul class="space-y-4 text-gray-300">
+                        <li class="flex items-center gap-3">
+                            <i class="fa-brands fa-whatsapp text-green-400 text-xl"></i>
+                            <a href="https://wa.me/5584991743293" class="hover:text-white transition-smooth">(84)
+                                99174-3293</a>
                         </li>
-                        <li class="flex items-center">
-                            <i class="fa-solid fa-location-dot text-vet-claro w-6"></i> 
-                            Natal, Rio Grande do Norte
+                        <li class="flex items-center gap-3">
+                            <i class="fa-solid fa-location-dot text-vet-claro text-xl"></i>
+                            <span>Natal, Rio Grande do Norte</span>
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <i class="fa-brands fa-instagram text-pink-400 text-xl"></i>
+                            <a href="https://www.instagram.com/rennevet/"
+                                class="hover:text-white transition-smooth">@rennevet</a>
                         </li>
                     </ul>
                 </div>
+
                 <!-- Coluna 3 -->
                 <div>
-                    <h4 class="text-xl font-bold mb-4">Horário</h4>
-                    <p class="text-gray-300 text-sm">Agendamento prévio via WhatsApp.</p>
-                    <div class="mt-4 flex space-x-4">
-                        <!-- Ícones Sociais -->
-                        <a href="https://www.instagram.com/rennevet/" class="bg-white/10 w-10 h-10 flex items-center justify-center rounded-full hover:bg-vet-claro transition">
+                    <h4 class="text-xl font-bold mb-6">Horário de Atendimento</h4>
+                    <p class="text-gray-300 mb-6">
+                        Atendimento mediante agendamento prévio via WhatsApp.
+                    </p>
+                    <div class="flex gap-4">
+                        <a href="https://www.instagram.com/rennevet/" target="_blank"
+                            class="bg-white/10 w-12 h-12 flex items-center justify-center rounded-xl hover:bg-vet-claro transition-smooth text-xl">
                             <i class="fa-brands fa-instagram"></i>
+                        </a>
+                        <a href="https://wa.me/5584991743293" target="_blank"
+                            class="bg-white/10 w-12 h-12 flex items-center justify-center rounded-xl hover:bg-green-500 transition-smooth text-xl">
+                            <i class="fa-brands fa-whatsapp"></i>
                         </a>
                     </div>
                 </div>
             </div>
-            
+
             <div class="border-t border-white/10 pt-8 text-center text-sm text-gray-400">
-                <p>&copy; 2025 Dr. Rennê Costa. Todos os direitos reservados.</p>
+                <p>&copy; 2025 Dr. Rennê Costa - CRMV-RN 2089. Todos os direitos reservados.</p>
             </div>
         </div>
     </footer>
 
     <!-- BOTÃO FLUTUANTE WHATSAPP -->
-    <a href="https://wa.me/5584991743293" target="_blank" class="zap-flutuante bg-[#25D366] text-white w-16 h-16 rounded-full flex items-center justify-center shadow-2xl hover:bg-green-600 transition duration-300 z-50" title="Agendar no WhatsApp">
-        <i class="fa-brands fa-whatsapp text-4xl"></i>
+    <a href="https://wa.me/5584991743293" target="_blank"
+        class="zap-flutuante bg-[#25D366] text-white w-16 h-16 md:w-20 md:h-20 rounded-full flex items-center justify-center hover:bg-green-600 transition-smooth"
+        title="Agendar no WhatsApp">
+        <i class="fa-brands fa-whatsapp text-3xl md:text-4xl"></i>
     </a>
+
+    <!-- =========================================
+         SCRIPTS
+    ========================================== -->
 
     <!-- Script Menu Mobile -->
     <script>
@@ -528,102 +842,28 @@
         });
     </script>
 
-    <!-- SCRIPT GEMINI API (Smart Pet) -->
+    <!-- Script Scroll Animations -->
     <script>
-        // ==========================================================
-        // CONFIGURAÇÃO DA API GEMINI
-        // ==========================================================
-        const apiKey = "AIzaSyBdc_5CxydQfHpBVcbavbOQpRggVZP-Sh4"; // A chave será injetada automaticamente neste ambiente de preview.
-        const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-09-2025:generateContent?key=${apiKey}`;
+        // Intersection Observer para animações ao scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
 
-        // Função Genérica para chamar o Gemini
-        async function callGemini(prompt) {
-            try {
-                const response = await fetch(apiUrl, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({
-                        contents: [{ parts: [{ text: prompt }] }]
-                    })
-                });
-                const data = await response.json();
-                return data.candidates[0].content.parts[0].text;
-            } catch (error) {
-                console.error("Erro na API:", error);
-                return "Desculpe, o sistema está sobrecarregado. Tente novamente em alguns instantes.";
-            }
-        }
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
 
-        // 1. FUNCIONALIDADE: TIRA-DÚVIDAS
-        async function askVetAI() {
-            const question = document.getElementById('questionInput').value;
-            if (!question) return alert("Por favor, digite sua dúvida.");
-
-            // UI Loading
-            const btnText = document.getElementById('btnTextQuestion');
-            const loader = document.getElementById('loaderQuestion');
-            const responseDiv = document.getElementById('responseQuestion');
-            
-            btnText.classList.add('hidden');
-            loader.classList.remove('hidden');
-            responseDiv.classList.add('hidden');
-
-            // Prompt Engineering (Engenharia de Prompt)
-            const prompt = `
-                Você é um assistente virtual de um médico veterinário experiente chamado Dr. Rennê Costa.
-                O usuário vai descrever um sintoma ou fazer uma pergunta sobre o pet.
-                Quando o usuário perguntar sobre vacinas, e, especialmente, for sobre GIÁRDIA, frise a contra-indicação da vacinação para Giardia orientada pela WASVA (World Small Animal Veterinary Association - wasava.org) e da imporância, nesse caso, do exame de feses.
-                Responda em português de forma calma, clara e útil.
-                IMPORTANTE: No final de TODA resposta, adicione o seguinte aviso (exatamente este texto):
-                "\n\n⚠️ Nota: Esta é uma orientação automática. Para um diagnóstico preciso e segurança do seu pet, agende uma visita com o Dr. Rennê Costa."
-                
-                Pergunta do usuário: "${question}"
-            `;
-
-            const answer = await callGemini(prompt);
-
-            // Mostrar Resposta
-            responseDiv.innerHTML = answer.replace(/\n/g, '<br>'); // Quebra de linha HTML
-            responseDiv.classList.remove('hidden');
-            
-            // Reset UI
-            btnText.classList.remove('hidden');
-            loader.classList.add('hidden');
-        }
-
-        // 2. FUNCIONALIDADE: DICA PERSONALIZADA
-        async function getPetTip() {
-            const name = document.getElementById('petName').value;
-            const breed = document.getElementById('petBreed').value;
-            
-            if (!name || !breed) return alert("Preencha o nome e a raça do pet!");
-
-            // UI Loading
-            const btnText = document.getElementById('btnTextTip');
-            const loader = document.getElementById('loaderTip');
-            const responseDiv = document.getElementById('responseTip');
-            
-            btnText.classList.add('hidden');
-            loader.classList.remove('hidden');
-            responseDiv.classList.add('hidden');
-
-            // Prompt
-            const prompt = `
-                Gere uma curiosidade interessante OU uma dica de saúde específica para um pet da raça ${breed}.
-                Comece a frase de forma personalizada, citando o nome "${name}".
-                Exemplo: "Você sabia que o ${name}, por ser um ${breed}, precisa de..."
-                Seja breve, carismático e use emojis. Encoraje uma consulta com Dr. Rennê Costa pelo número (84) 99174-3293 WhatsApp. Responda em português.
-            `;
-
-            const answer = await callGemini(prompt);
-
-            responseDiv.innerHTML = answer.replace(/\n/g, '<br>');
-            responseDiv.classList.remove('hidden');
-            
-            btnText.classList.remove('hidden');
-            loader.classList.add('hidden');
-        }
+        // Observar todos os elementos com classe fade-in
+        document.querySelectorAll('.fade-in').forEach(el => {
+            observer.observe(el);
+        });
     </script>
 
 </body>
+
 </html>
