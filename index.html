@@ -74,9 +74,9 @@
 
         /* Glassmorphism Header */
         .header-glass {
-            background: rgba(255, 255, 255, 0.82);
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
+            background: rgba(255, 255, 255, 0.88);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
         }
 
         /* Botão WhatsApp Flutuante */
@@ -85,63 +85,107 @@
             bottom: 24px;
             right: 24px;
             z-index: 100;
-            animation: pulse 2s infinite;
-            box-shadow: 0 8px 32px rgba(37, 211, 102, 0.4);
+            animation: pulse 2.5s ease-in-out infinite;
+            box-shadow: 0 8px 32px rgba(37, 211, 102, 0.45);
         }
 
         @keyframes pulse {
-            0% {
+
+            0%,
+            100% {
                 transform: scale(1);
+                box-shadow: 0 8px 32px rgba(37, 211, 102, 0.45);
             }
 
             50% {
-                transform: scale(1.05);
-            }
-
-            100% {
-                transform: scale(1);
+                transform: scale(1.07);
+                box-shadow: 0 12px 40px rgba(37, 211, 102, 0.65);
             }
         }
 
-        /* Animações de Scroll */
-        .fade-in {
+        /* ── REVEAL: elementos ocultos, GSAP anima ── */
+        .reveal {
             opacity: 0;
-            transform: translateY(30px);
-            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+            transform: translateY(48px);
+            will-change: opacity, transform;
         }
 
-        .fade-in.visible {
-            opacity: 1;
-            transform: translateY(0);
+        .reveal-left {
+            opacity: 0;
+            transform: translateX(-60px);
+            will-change: opacity, transform;
+        }
+
+        .reveal-right {
+            opacity: 0;
+            transform: translateX(60px);
+            will-change: opacity, transform;
+        }
+
+        .reveal-scale {
+            opacity: 0;
+            transform: scale(0.88);
+            will-change: opacity, transform;
+        }
+
+        /* ── SHIMMER LINE (aparece embaixo dos h2) ── */
+        .section-headline {
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-headline::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 0;
+            height: 3px;
+            width: 0;
+            background: linear-gradient(90deg, #4F9D69, #1B4D3E);
+            border-radius: 2px;
+            transition: none;
+        }
+
+        /* ── CLIP-PATH REVEAL para seções dark ── */
+        .clip-reveal {
+            clip-path: inset(0 100% 0 0);
+            opacity: 1 !important;
         }
 
         /* Hero Overlay Gradiente */
         .hero-overlay {
-            background: linear-gradient(135deg, rgba(27, 77, 62, 0.92) 0%, rgba(79, 157, 105, 0.85) 100%);
+            background: linear-gradient(135deg, rgba(27, 77, 62, 0.93) 0%, rgba(79, 157, 105, 0.82) 100%);
         }
 
         /* Card Premium Shadows */
         .card-premium {
-            box-shadow: 0 10px 40px -10px rgba(0, 0, 0, 0.05);
-            border: 1px solid rgba(0, 0, 0, 0.02);
-            transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+            box-shadow: 0 10px 40px -10px rgba(0, 0, 0, 0.06);
+            border: 1px solid rgba(0, 0, 0, 0.03);
+            transition: all 0.55s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
         .card-premium:hover {
-            transform: translateY(-4px) scale(1.01);
-            box-shadow: 0 20px 60px -15px rgba(0, 0, 0, 0.08);
-            border-color: rgba(79, 157, 105, 0.1);
+            transform: translateY(-6px) scale(1.015);
+            box-shadow: 0 24px 60px -12px rgba(27, 77, 62, 0.14);
+            border-color: rgba(79, 157, 105, 0.15);
         }
 
         /* Glassmorphism Cards */
         .glass-card {
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.18);
+            background: rgba(255, 255, 255, 0.09);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.20);
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
-        /* Transições Suaves Universais */
+        .glass-card:hover {
+            background: rgba(255, 255, 255, 0.18);
+            transform: translateY(-4px);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Transições Universais */
         button,
         a,
         .transition-smooth {
@@ -173,17 +217,35 @@
             }
         }
 
-        /* Loader */
-        .loader {
-            border: 4px solid #f3f3f3;
-            border-top: 4px solid #1B4D3E;
-            border-radius: 50%;
-            width: 24px;
-            height: 24px;
-            animation: spin 1s linear infinite;
-            display: inline-block;
+        /* Progress bar no topo (scroll indicator) */
+        #scroll-progress {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 3px;
+            width: 0%;
+            background: linear-gradient(90deg, #4F9D69, #1B4D3E);
+            z-index: 9999;
+            transition: width 0.1s linear;
         }
 
+        /* Hero parallax layer */
+        .hero-parallax {
+            will-change: transform;
+        }
+
+        /* Smooth Scroll Offset */
+        section {
+            scroll-margin-top: 80px;
+        }
+
+        /* Counter number estilo */
+        .stat-number {
+            font-variant-numeric: tabular-nums;
+            font-feature-settings: 'tnum';
+        }
+
+        /* Loader */
         @keyframes spin {
             0% {
                 transform: rotate(0deg);
@@ -192,11 +254,6 @@
             100% {
                 transform: rotate(360deg);
             }
-        }
-
-        /* Smooth Scroll Offset */
-        section {
-            scroll-margin-top: 80px;
         }
     </style>
 </head>
@@ -254,17 +311,15 @@
          HERO (BANNER PRINCIPAL)
     ========================================== -->
     <section class="hero-section relative pt-24 md:pt-32 pb-20 md:pb-32 overflow-hidden">
-        <!-- Background com Overlay (Sem imagem para destacar o card) -->
         <div class="absolute inset-0 z-0 bg-vet-escuro">
             <div class="hero-overlay absolute inset-0"></div>
         </div>
 
-        <!-- Conteúdo -->
         <div class="container mx-auto px-6 relative z-10">
             <div class="flex flex-col lg:flex-row items-center gap-12 lg:gap-16">
 
                 <!-- Coluna Texto (Esquerda) -->
-                <div class="w-full lg:w-1/2 text-center lg:text-left text-white fade-in">
+                <div class="w-full lg:w-1/2 text-center lg:text-left text-white reveal-left">
                     <span
                         class="bg-white/20 backdrop-blur-sm text-white px-4 py-2 rounded-full text-sm font-semibold mb-6 inline-block border border-white/30">
                         <i class="fa-solid fa-location-dot mr-1"></i> Atendimento Premium em Natal/RN
@@ -300,11 +355,11 @@
                     </div>
                 </div>
 
-                <!-- Coluna Imagem/Card (Direita) -->
-                <div class="w-full lg:w-1/2 fade-in mt-10 lg:mt-0">
+                <!-- Coluna Imagem (Direita) -->
+                <div class="w-full lg:w-1/2 reveal-right mt-10 lg:mt-0">
                     <div class="relative">
-                        <img src="foto-com-pacientes4.jpeg" alt="Dr. Rennê Atendendo"
-                            class="rounded-3xl shadow-2xl w-full aspect-[4/3] object-cover border-8 border-white/20">
+                        <img src="hero-foto.jpeg" alt="Dr. Rennê Atendendo"
+                            class="rounded-3xl shadow-2xl w-full aspect-[4/3] object-cover object-[50%_20%] border-8 border-white/20">
                     </div>
                 </div>
 
@@ -312,14 +367,16 @@
         </div>
     </section>
 
+    <!-- Transição: Hero → Benefícios -->
+
     <!-- =========================================
          BENEFÍCIOS
     ========================================== -->
     <section class="py-20 md:py-24 bg-white">
         <div class="container mx-auto px-6">
-            <div class="grid md:grid-cols-3 gap-8 md:gap-10">
+            <div class="grid md:grid-cols-3 gap-8 md:gap-10 stagger-group">
 
-                <div class="card-premium p-8 rounded-2xl bg-white border border-gray-100 text-center fade-in">
+                <div class="card-premium p-8 rounded-2xl bg-white border border-gray-100 text-center stagger-item">
                     <div
                         class="w-20 h-20 mx-auto mb-6 rounded-full bg-gradient-to-br from-vet-claro to-vet-escuro flex items-center justify-center">
                         <i class="fa-solid fa-heart-pulse text-3xl text-white"></i>
@@ -331,8 +388,7 @@
                     </p>
                 </div>
 
-                <div class="card-premium p-8 rounded-2xl bg-white border border-gray-100 text-center fade-in"
-                    style="transition-delay: 0.1s;">
+                <div class="card-premium p-8 rounded-2xl bg-white border border-gray-100 text-center stagger-item">
                     <div
                         class="w-20 h-20 mx-auto mb-6 rounded-full bg-gradient-to-br from-vet-claro to-vet-escuro flex items-center justify-center">
                         <i class="fa-solid fa-clock text-3xl text-white"></i>
@@ -343,8 +399,7 @@
                     </p>
                 </div>
 
-                <div class="card-premium p-8 rounded-2xl bg-white border border-gray-100 text-center fade-in"
-                    style="transition-delay: 0.2s;">
+                <div class="card-premium p-8 rounded-2xl bg-white border border-gray-100 text-center stagger-item">
                     <div
                         class="w-20 h-20 mx-auto mb-6 rounded-full bg-gradient-to-br from-vet-claro to-vet-escuro flex items-center justify-center">
                         <i class="fa-solid fa-user-doctor text-3xl text-white"></i>
@@ -357,777 +412,1018 @@
                 </div>
 
             </div>
-        </div>
-    </section>
 
-    <!-- =========================================
+            <!-- Estatísticas Premium -->
+            <!-- <div class="mt-20 grid grid-cols-2 md:grid-cols-4 gap-8 border-t border-gray-100 pt-16 stagger-group">
+                <div class="text-center stagger-item">
+                    <div class="text-4xl md:text-5xl font-serif font-bold text-vet-escuro mb-2 stat-number"
+                        data-target="10" data-suffix="+">0</div>
+                    <p class="text-gray-500 font-medium">Anos de Experiência</p>
+                </div>
+                <div class="text-center stagger-item">
+                    <div class="text-4xl md:text-5xl font-serif font-bold text-vet-escuro mb-2 stat-number"
+                        data-target="2500" data-suffix="+">0</div>
+                    <p class="text-gray-500 font-medium">Pets Atendidos</p>
+                </div>
+                <div class="text-center stagger-item">
+                    <div class="text-4xl md:text-5xl font-serif font-bold text-vet-escuro mb-2 stat-number"
+                        data-target="100" data-suffix="%">0</div>
+                    <p class="text-gray-500 font-medium">Amor e Dedicação</p>
+                </div>
+                <div class="text-center stagger-item">
+                    <div class="text-4xl md:text-5xl font-serif font-bold text-vet-escuro mb-2 stat-number"
+                        data-target="15" data-suffix="+">0</div>
+                    <p class="text-gray-500 font-medium">Especialidades</p>
+                </div>
+            </div>
+        </div>
+    </section> -->
+
+            <!-- Transição: Benefícios → Serviços -->
+
+            <!-- =========================================
          SERVIÇOS
     ========================================== -->
-    <section id="servicos"
-        class="py-20 md:py-24 bg-gradient-to-br from-vet-escuro to-[#153d31] text-white relative overflow-hidden">
-        <!-- Pattern Decorativo -->
-        <div class="absolute inset-0 opacity-5">
-            <div class="absolute inset-0"
-                style="background-image: url('data:image/svg+xml,%3Csvg width=&quot;60&quot; height=&quot;60&quot; viewBox=&quot;0 0 60 60&quot; xmlns=&quot;http://www.w3.org/2000/svg&quot;%3E%3Cg fill=&quot;none&quot; fill-rule=&quot;evenodd&quot;%3E%3Cg fill=&quot;%23ffffff&quot; fill-opacity=&quot;1&quot;%3E%3Cpath d=&quot;M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z&quot;/%3E%3C/g%3E%3C/g%3E%3C/svg%3E');">
-            </div>
-        </div>
-
-        <div class="container mx-auto px-6 relative z-10">
-            <div class="text-center mb-16 fade-in">
-                <h2 class="text-4xl md:text-5xl font-serif font-bold mb-4">Serviços Oferecidos</h2>
-                <p class="text-green-100 text-lg md:text-xl max-w-2xl mx-auto">
-                    Consultório veterinário completo no conforto da sua residência
-                </p>
-            </div>
-
-            <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
-
-                <!-- Card Serviço 1 -->
-                <div class="glass-card p-8 rounded-2xl hover:bg-white/20 transition-smooth fade-in">
-                    <i class="fa-solid fa-stethoscope text-4xl text-vet-claro mb-6 block"></i>
-                    <h3 class="text-xl font-bold mb-3 font-serif">Consulta Clínica</h3>
-                    <p class="text-sm text-gray-100 leading-relaxed">
-                        Avaliação completa do estado de saúde, diagnóstico de condições clínicas e prescrição de
-                        tratamentos adequados.
-                    </p>
+            <section id="servicos"
+                class="py-20 md:py-24 bg-gradient-to-br from-vet-escuro to-[#153d31] text-white relative overflow-hidden">
+                <!-- Pattern Decorativo -->
+                <div class="absolute inset-0 opacity-5">
+                    <div class="absolute inset-0"
+                        style="background-image: url('data:image/svg+xml,%3Csvg width=&quot;60&quot; height=&quot;60&quot; viewBox=&quot;0 0 60 60&quot; xmlns=&quot;http://www.w3.org/2000/svg&quot;%3E%3Cg fill=&quot;none&quot; fill-rule=&quot;evenodd&quot;%3E%3Cg fill=&quot;%23ffffff&quot; fill-opacity=&quot;1&quot;%3E%3Cpath d=&quot;M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z&quot;/%3E%3C/g%3E%3C/g%3E%3C/svg%3E');">
+                    </div>
                 </div>
 
-                <!-- Card Serviço 2 -->
-                <div class="glass-card p-8 rounded-2xl hover:bg-white/20 transition-smooth fade-in"
-                    style="transition-delay: 0.1s;">
-                    <i class="fa-solid fa-syringe text-4xl text-vet-claro mb-6 block"></i>
-                    <h3 class="text-xl font-bold mb-3 font-serif">Vacinação Premium</h3>
-                    <p class="text-sm text-gray-100 leading-relaxed">
-                        Vacinas importadas de alta qualidade (V8/V10, Raiva, V5/V4 felina) com protocolo rigoroso de
-                        conservação.
-                    </p>
+                <div class="container mx-auto px-6 relative z-10">
+                    <div class="text-center mb-16 reveal">
+                        <h2 class="text-4xl md:text-5xl font-serif font-bold mb-4 section-headline">Serviços Oferecidos
+                        </h2>
+                        <p class="text-green-100 text-lg md:text-xl max-w-2xl mx-auto">
+                            Consultório veterinário completo no conforto da sua residência
+                        </p>
+                    </div>
+
+                    <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-12 stagger-group">
+
+                        <div class="glass-card p-8 rounded-2xl hover:bg-white/20 transition-smooth stagger-item">
+                            <i class="fa-solid fa-stethoscope text-4xl text-vet-claro mb-6 block"></i>
+                            <h3 class="text-xl font-bold mb-3 font-serif">Consulta Clínica</h3>
+                            <p class="text-sm text-gray-100 leading-relaxed">
+                                Avaliação completa do estado de saúde, diagnóstico de condições clínicas e prescrição de
+                                tratamentos adequados.
+                            </p>
+                        </div>
+
+                        <div class="glass-card p-8 rounded-2xl hover:bg-white/20 transition-smooth stagger-item">
+                            <i class="fa-solid fa-syringe text-4xl text-vet-claro mb-6 block"></i>
+                            <h3 class="text-xl font-bold mb-3 font-serif">Vacinação Premium</h3>
+                            <p class="text-sm text-gray-100 leading-relaxed">
+                                Vacinas importadas de alta qualidade (V8/V10, Raiva, V5/V4 felina) com protocolo
+                                rigoroso de
+                                conservação.
+                            </p>
+                        </div>
+
+                        <div class="glass-card p-8 rounded-2xl hover:bg-white/20 transition-smooth stagger-item">
+                            <i class="fa-solid fa-flask text-4xl text-vet-claro mb-6 block"></i>
+                            <h3 class="text-xl font-bold mb-3 font-serif">Exames Laboratoriais</h3>
+                            <p class="text-sm text-gray-100 leading-relaxed">
+                                Coleta profissional de amostras para análises laboratoriais e diagnóstico preciso.
+                            </p>
+                        </div>
+
+                        <div class="glass-card p-8 rounded-2xl hover:bg-white/20 transition-smooth stagger-item">
+                            <i class="fa-solid fa-passport text-4xl text-vet-claro mb-6 block"></i>
+                            <h3 class="text-xl font-bold mb-3 font-serif">Atestado de Viagem</h3>
+                            <p class="text-sm text-gray-100 leading-relaxed">
+                                Emissão de CVI/GTA para viagens nacionais e internacionais com toda documentação
+                                necessária.
+                            </p>
+                        </div>
+
+                    </div>
+
+                    <div class="text-center fade-in">
+                        <a href="https://wa.me/5584991743293"
+                            class="inline-flex items-center gap-3 bg-white text-vet-escuro px-10 py-4 rounded-full font-bold text-lg hover:bg-vet-claro hover:text-white transition-smooth shadow-2xl hover:shadow-xl hover:scale-105">
+                            <i class="fa-brands fa-whatsapp text-2xl"></i> Solicitar Orçamento
+                        </a>
+                    </div>
                 </div>
+            </section>
 
-                <!-- Card Serviço 3 -->
-                <div class="glass-card p-8 rounded-2xl hover:bg-white/20 transition-smooth fade-in"
-                    style="transition-delay: 0.2s;">
-                    <i class="fa-solid fa-flask text-4xl text-vet-claro mb-6 block"></i>
-                    <h3 class="text-xl font-bold mb-3 font-serif">Exames Laboratoriais</h3>
-                    <p class="text-sm text-gray-100 leading-relaxed">
-                        Coleta profissional de amostras para análises laboratoriais e diagnóstico preciso.
-                    </p>
-                </div>
+            <!-- Transição: Serviços → Sobre -->
 
-                <!-- Card Serviço 4 -->
-                <div class="glass-card p-8 rounded-2xl hover:bg-white/20 transition-smooth fade-in"
-                    style="transition-delay: 0.3s;">
-                    <i class="fa-solid fa-passport text-4xl text-vet-claro mb-6 block"></i>
-                    <h3 class="text-xl font-bold mb-3 font-serif">Atestado de Viagem</h3>
-                    <p class="text-sm text-gray-100 leading-relaxed">
-                        Emissão de CVI/GTA para viagens nacionais e internacionais com toda documentação necessária.
-                    </p>
-                </div>
-
-            </div>
-
-            <div class="text-center fade-in">
-                <a href="https://wa.me/5584991743293"
-                    class="inline-flex items-center gap-3 bg-white text-vet-escuro px-10 py-4 rounded-full font-bold text-lg hover:bg-vet-claro hover:text-white transition-smooth shadow-2xl hover:shadow-xl hover:scale-105">
-                    <i class="fa-brands fa-whatsapp text-2xl"></i> Solicitar Orçamento
-                </a>
-            </div>
-        </div>
-    </section>
-
-    <!-- =========================================
+            <!-- =========================================
          SOBRE O DR. RENNÊ
     ========================================== -->
-    <section id="sobre" class="py-20 md:py-24 bg-vet-beige">
-        <div class="container mx-auto px-6">
-            <div class="flex flex-col lg:flex-row items-center gap-12 lg:gap-16">
+            <section id="sobre" class="py-20 md:py-24 bg-vet-beige">
+                <div class="container mx-auto px-6">
+                    <div class="flex flex-col lg:flex-row items-center gap-12 lg:gap-16">
 
-                <div class="w-full lg:w-1/2 fade-in">
-                    <div class="relative">
-                        <img src="perfil-2.jpeg" alt="Dr. Rennê Costa Veterinário"
-                            class="rounded-3xl shadow-2xl w-full aspect-[3/4] object-cover border-8 border-white">
-                        <!-- Badge Flutuante -->
-                        <div class="absolute -bottom-6 -right-6 bg-white p-6 rounded-2xl shadow-xl hidden lg:block">
-                            <div class="flex items-center gap-3">
-                                <div class="bg-gradient-to-br from-vet-claro to-vet-escuro p-4 rounded-xl text-white">
-                                    <i class="fa-solid fa-certificate text-3xl"></i>
-                                </div>
-                                <div>
-                                    <p class="font-bold text-vet-escuro text-lg">CRMV Ativo</p>
-                                    <p class="text-xs text-gray-500">Registro Profissional</p>
-                                    <p class="text-xs text-gray-500">CRMV-RN 2089</p>
+                        <div class="w-full lg:w-1/2 reveal-left">
+                            <div class="relative">
+                                <img src="perfil-novo.jpeg" alt="Dr. Rennê Costa Veterinário"
+                                    class="rounded-3xl shadow-2xl w-full aspect-[3/4] object-cover border-8 border-white">
+                                <!-- Badge Flutuante -->
+                                <div
+                                    class="absolute -bottom-6 -right-6 bg-white p-6 rounded-2xl shadow-xl hidden lg:block reveal-scale">
+                                    <div class="flex items-center gap-3">
+                                        <div
+                                            class="bg-gradient-to-br from-vet-claro to-vet-escuro p-4 rounded-xl text-white">
+                                            <i class="fa-solid fa-certificate text-3xl"></i>
+                                        </div>
+                                        <div>
+                                            <p class="font-bold text-vet-escuro text-lg">CRMV Ativo</p>
+                                            <p class="text-xs text-gray-500">Registro Profissional</p>
+                                            <p class="text-xs text-gray-500">CRMV-RN 2089</p>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
+
+                        <div class="w-full lg:w-1/2 reveal-right">
+                            <h2 class="text-4xl md:text-5xl font-serif font-bold text-vet-escuro mb-4 section-headline">
+                                Excelência em Medicina Veterinária
+                            </h2>
+                            <h3 class="text-2xl text-vet-claro font-bold mb-6">
+                                Dr. Rennê Costa
+                                <span class="text-base text-gray-500 font-normal">
+                                    <a href="https://app.cfmv.gov.br/paginas/busca" target="_blank"
+                                        class="hover:text-vet-claro transition-smooth">(CRMV-RN 2089)</a>
+                                </span>
+                            </h3>
+
+                            <div class="space-y-5 text-gray-700 leading-relaxed mb-8">
+                                <p>
+                                    Com formação especializada em Clínica Médica de Pequenos Animais e anos de
+                                    experiência,
+                                    minha missão é proporcionar cuidado veterinário de alto padrão no ambiente mais
+                                    confortável
+                                    para o seu pet: o próprio lar.
+                                </p>
+                                <p>
+                                    Compreendo que cada animal é único, assim como cada família. Por isso, ofereço
+                                    atendimento
+                                    personalizado, levando equipamentos profissionais e expertise clínica diretamente
+                                    até você,
+                                    sem comprometer a qualidade do serviço.
+                                </p>
+                            </div>
+
+                            <div class="grid grid-cols-2 gap-4 mb-8">
+                                <div class="flex items-center gap-3">
+                                    <i class="fa-solid fa-check-circle text-vet-claro text-xl"></i>
+                                    <span class="text-gray-700 font-medium">Atendimento Domiciliar</span>
+                                </div>
+                                <div class="flex items-center gap-3">
+                                    <i class="fa-solid fa-check-circle text-vet-claro text-xl"></i>
+                                    <span class="text-gray-700 font-medium">Vacinas Importadas</span>
+                                </div>
+                                <div class="flex items-center gap-3">
+                                    <i class="fa-solid fa-check-circle text-vet-claro text-xl"></i>
+                                    <span class="text-gray-700 font-medium">CRMV Regularizado</span>
+                                </div>
+                                <div class="flex items-center gap-3">
+                                    <i class="fa-solid fa-check-circle text-vet-claro text-xl"></i>
+                                    <span class="text-gray-700 font-medium">Dedicação aos Animais</span>
+                                </div>
+                            </div>
+
+                            <a href="https://wa.me/5584991743293"
+                                class="inline-flex items-center gap-2 text-vet-escuro font-bold text-lg hover:text-vet-claro transition-smooth group">
+                                Agende sua consulta
+                                <i class="fa-solid fa-arrow-right group-hover:translate-x-2 transition-smooth"></i>
+                            </a>
+                        </div>
+
                     </div>
                 </div>
+            </section>
 
-                <div class="w-full lg:w-1/2 fade-in">
-                    <h2 class="text-4xl md:text-5xl font-serif font-bold text-vet-escuro mb-4">
-                        Excelência em Medicina Veterinária
-                    </h2>
-                    <h3 class="text-2xl text-vet-claro font-bold mb-6">
-                        Dr. Rennê Costa
-                        <span class="text-base text-gray-500 font-normal">
-                            <a href="https://app.cfmv.gov.br/paginas/busca" target="_blank"
-                                class="hover:text-vet-claro transition-smooth">(CRMV-RN 2089)</a>
-                        </span>
-                    </h3>
+            <!-- Transição: Sobre → Depoimentos -->
 
-                    <div class="space-y-5 text-gray-700 leading-relaxed mb-8">
-                        <p>
-                            Com formação especializada em Clínica Médica de Pequenos Animais e anos de experiência,
-                            minha missão é proporcionar cuidado veterinário de alto padrão no ambiente mais confortável
-                            para o seu pet: o próprio lar.
-                        </p>
-                        <p>
-                            Compreendo que cada animal é único, assim como cada família. Por isso, ofereço atendimento
-                            personalizado, levando equipamentos profissionais e expertise clínica diretamente até você,
-                            sem comprometer a qualidade do serviço.
-                        </p>
-                    </div>
-
-                    <div class="grid grid-cols-2 gap-4 mb-8">
-                        <div class="flex items-center gap-3">
-                            <i class="fa-solid fa-check-circle text-vet-claro text-xl"></i>
-                            <span class="text-gray-700 font-medium">Atendimento Domiciliar</span>
-                        </div>
-                        <div class="flex items-center gap-3">
-                            <i class="fa-solid fa-check-circle text-vet-claro text-xl"></i>
-                            <span class="text-gray-700 font-medium">Vacinas Importadas</span>
-                        </div>
-                        <div class="flex items-center gap-3">
-                            <i class="fa-solid fa-check-circle text-vet-claro text-xl"></i>
-                            <span class="text-gray-700 font-medium">CRMV Regularizado</span>
-                        </div>
-                        <div class="flex items-center gap-3">
-                            <i class="fa-solid fa-check-circle text-vet-claro text-xl"></i>
-                            <span class="text-gray-700 font-medium">Dedicação aos Animais</span>
-                        </div>
-                    </div>
-
-                    <a href="https://wa.me/5584991743293"
-                        class="inline-flex items-center gap-2 text-vet-escuro font-bold text-lg hover:text-vet-claro transition-smooth group">
-                        Agende sua consulta
-                        <i class="fa-solid fa-arrow-right group-hover:translate-x-2 transition-smooth"></i>
-                    </a>
-                </div>
-
-            </div>
-        </div>
-    </section>
-
-    <!-- =========================================
+            <!-- =========================================
          DEPOIMENTOS (PROVA SOCIAL)
     ========================================== -->
-    <section id="depoimentos" class="py-20 md:py-24 bg-white">
-        <div class="container mx-auto px-6">
-            <div class="text-center mb-16 fade-in">
-                <h2 class="text-4xl md:text-5xl font-serif font-bold text-vet-escuro mb-4">
-                    Depoimentos de Clientes
-                </h2>
-                <p class="text-gray-600 text-lg">
-                    A confiança dos tutores é nossa maior conquista
-                </p>
-            </div>
-
-            <div class="grid md:grid-cols-3 gap-8 mb-12">
-
-                <!-- Depoimento 1 -->
-                <div class="card-premium bg-white p-8 rounded-xl border-b-4 border-vet-claro fade-in">
-                    <div class="quote-mark mb-4">"</div>
-                    <div
-                        class="w-20 h-20 mx-auto rounded-full overflow-hidden mb-6 border-4 border-vet-claro shadow-lg">
-                        <img src="foto-com-pacientes1.jpeg" alt="Pet do Tutor" class="object-cover w-full h-full">
+            <section id="depoimentos" class="py-20 md:py-24 bg-white">
+                <div class="container mx-auto px-6">
+                    <div class="text-center mb-16 reveal">
+                        <h2 class="text-4xl md:text-5xl font-serif font-bold text-vet-escuro mb-4 section-headline">
+                            Depoimentos de Clientes
+                        </h2>
+                        <p class="text-gray-600 text-lg">
+                            A confiança dos tutores é nossa maior conquista
+                        </p>
                     </div>
-                    <div class="flex justify-center mb-4 text-yellow-400">
-                        <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i
-                            class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i
-                            class="fa-solid fa-star"></i>
+
+                    <div class="grid md:grid-cols-3 gap-8 mb-12 stagger-group">
+
+                        <!-- Depoimento 1 -->
+                        <div class="card-premium bg-white p-8 rounded-xl border-b-4 border-vet-claro stagger-item">
+                            <div class="quote-mark mb-4">"</div>
+                            <div
+                                class="w-20 h-20 mx-auto rounded-full overflow-hidden mb-6 border-4 border-vet-claro shadow-lg">
+                                <img src="foto-com-pacientes1.jpeg" alt="Pet do Tutor"
+                                    class="object-cover w-full h-full">
+                            </div>
+                            <div class="flex justify-center mb-4 text-yellow-400">
+                                <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i
+                                    class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i
+                                    class="fa-solid fa-star"></i>
+                            </div>
+                            <p class="text-gray-600 italic mb-6 leading-relaxed">
+                                "Rennê é um veterinário que atende com muito amor e empatia nossos pets, tive a
+                                experiência com
+                                ele em que meu cachorro estava precisando de um atendimento e a clínica já estava
+                                fechando,
+                                porém o mesmo prontamente ficou lá esperando eu chegar e meu pet ser atendido. Sabe
+                                cativar não
+                                só o pet mas também os tutores. Excepcional!"
+                            </p>
+                            <div class="font-bold text-vet-escuro">— Leandro Gomes</div>
+                        </div>
+
+                        <!-- Depoimento 2 -->
+                        <div class="card-premium bg-white p-8 rounded-2xl border-b-4 border-vet-claro stagger-item">
+                            <div class="quote-mark mb-4">"</div>
+                            <div
+                                class="w-20 h-20 mx-auto rounded-full overflow-hidden mb-6 border-4 border-vet-claro shadow-lg">
+                                <img src="foto-com-pacientes2.jpeg" alt="Pet do Tutor"
+                                    class="object-cover w-full h-full">
+                            </div>
+                            <div class="flex justify-center mb-4 text-yellow-400">
+                                <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i
+                                    class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i
+                                    class="fa-solid fa-star"></i>
+                            </div>
+                            <p class="text-gray-600 italic mb-6 leading-relaxed">
+                                "Adorei o atendimento com Dr Rennê super atencioso e cuidadoso com meu Dudu. Tirou todas
+                                as
+                                minhas dúvidas com muita delicadeza. Super recomendo!"
+                            </p>
+                            <div class="font-bold text-vet-escuro">— Aline Costa</div>
+                        </div>
+
+                        <!-- Depoimento 3 -->
+                        <div class="card-premium bg-white p-8 rounded-2xl border-b-4 border-vet-claro stagger-item">
+                            <div class="quote-mark mb-4">"</div>
+                            <div
+                                class="w-20 h-20 mx-auto rounded-full overflow-hidden mb-6 border-4 border-vet-claro shadow-lg">
+                                <img src="foto-com-pacientes3.jpeg" alt="Pet do Tutor"
+                                    class="object-cover w-full h-full">
+                            </div>
+                            <div class="flex justify-center mb-4 text-yellow-400">
+                                <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i
+                                    class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i
+                                    class="fa-solid fa-star"></i>
+                            </div>
+                            <p class="text-gray-600 italic mb-6 leading-relaxed">
+                                "Não tenho palavras para expressar o quanto Dr renne é maravilhoso, veterinario
+                                atencioso a
+                                todos os detalhes de sintomas do pet, carinhoso e cuidadoso. Adotamos para cuidar de
+                                todos os
+                                pets da nossa familia."
+                            </p>
+                            <div class="font-bold text-vet-escuro">— Mayara Cavalcanti</div>
+                        </div>
+
                     </div>
-                    <p class="text-gray-600 italic mb-6 leading-relaxed">
-                        "Rennê é um veterinário que atende com muito amor e empatia nossos pets, tive a experiência com
-                        ele em que meu cachorro estava precisando de um atendimento e a clínica já estava fechando,
-                        porém o mesmo prontamente ficou lá esperando eu chegar e meu pet ser atendido. Sabe cativar não
-                        só o pet mas também os tutores. Excepcional!"
-                    </p>
-                    <div class="font-bold text-vet-escuro">— Leandro Gomes</div>
+
+                    <!-- Botão Ver Mais Depoimentos -->
+                    <div class="text-center reveal">
+                        <a href="https://maps.app.goo.gl/A3J9yorQFj7U82oB9" target="_blank"
+                            class="inline-flex items-center gap-3 bg-white border-2 border-vet-escuro text-vet-escuro px-8 py-4 rounded-full font-bold hover:bg-vet-escuro hover:text-white transition-smooth shadow-lg hover:shadow-xl">
+                            <i class="fa-brands fa-google text-xl"></i> Veja mais avaliações
+                        </a>
+                    </div>
                 </div>
+            </section>
 
-                <!-- Depoimento 2 -->
-                <div class="card-premium bg-white p-8 rounded-2xl border-b-4 border-vet-claro fade-in"
-                    style="transition-delay: 0.1s;">
-                    <div class="quote-mark mb-4">"</div>
-                    <div
-                        class="w-20 h-20 mx-auto rounded-full overflow-hidden mb-6 border-4 border-vet-claro shadow-lg">
-                        <img src="foto-com-pacientes2.jpeg" alt="Pet do Tutor" class="object-cover w-full h-full">
-                    </div>
-                    <div class="flex justify-center mb-4 text-yellow-400">
-                        <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i
-                            class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i
-                            class="fa-solid fa-star"></i>
-                    </div>
-                    <p class="text-gray-600 italic mb-6 leading-relaxed">
-                        "Adorei o atendimento com Dr Rennê super atencioso e cuidadoso com meu Dudu. Tirou todas as
-                        minhas dúvidas com muita delicadeza. Super recomendo!"
-                    </p>
-                    <div class="font-bold text-vet-escuro">— Aline Costa</div>
-                </div>
+            <!-- Transição: Depoimentos → Instagram -->
 
-                <!-- Depoimento 3 -->
-                <div class="card-premium bg-white p-8 rounded-2xl border-b-4 border-vet-claro fade-in"
-                    style="transition-delay: 0.2s;">
-                    <div class="quote-mark mb-4">"</div>
-                    <div
-                        class="w-20 h-20 mx-auto rounded-full overflow-hidden mb-6 border-4 border-vet-claro shadow-lg">
-                        <img src="foto-com-pacientes3.jpeg" alt="Pet do Tutor" class="object-cover w-full h-full">
-                    </div>
-                    <div class="flex justify-center mb-4 text-yellow-400">
-                        <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i
-                            class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i
-                            class="fa-solid fa-star"></i>
-                    </div>
-                    <p class="text-gray-600 italic mb-6 leading-relaxed">
-                        "Não tenho palavras para expressar o quanto Dr renne é maravilhoso, veterinario atencioso a
-                        todos os detalhes de sintomas do pet, carinhoso e cuidadoso. Adotamos para cuidar de todos os
-                        pets da nossa familia."
-                    </p>
-                    <div class="font-bold text-vet-escuro">— Mayara Cavalcanti</div>
-                </div>
-
-            </div>
-
-            <!-- Botão Ver Mais Depoimentos -->
-            <div class="text-center fade-in">
-                <a href="https://maps.app.goo.gl/A3J9yorQFj7U82oB9" target="_blank"
-                    class="inline-flex items-center gap-3 bg-white border-2 border-vet-escuro text-vet-escuro px-8 py-4 rounded-full font-bold hover:bg-vet-escuro hover:text-white transition-smooth shadow-lg hover:shadow-xl">
-                    <i class="fa-brands fa-google text-xl"></i> Veja mais avaliações
-                </a>
-            </div>
-        </div>
-    </section>
-
-    <!-- =========================================
+            <!-- =========================================
          INSTAGRAM (@rennevet)
     ========================================== -->
-    <section class="py-20 bg-gradient-to-b from-vet-beige to-white border-t border-gray-100">
-        <div class="container mx-auto px-6">
-            <div class="text-center mb-12 fade-in">
-                <h2
-                    class="text-3xl md:text-4xl font-serif font-bold text-vet-escuro mb-3 flex items-center justify-center gap-3">
-                    <i class="fa-brands fa-instagram text-pink-500"></i> Siga no Instagram
-                </h2>
-                <p class="text-gray-600">Dicas e conteúdos sobre saúde animal</p>
-            </div>
+            <section class="py-20 bg-gradient-to-b from-vet-beige to-white">
+                <div class="container mx-auto px-6">
+                    <div class="text-center mb-12 reveal">
+                        <h2
+                            class="text-3xl md:text-4xl font-serif font-bold text-vet-escuro mb-3 flex items-center justify-center gap-3 section-headline">
+                            <i class="fa-brands fa-instagram text-pink-500"></i> Siga no Instagram
+                        </h2>
+                        <p class="text-gray-600">Dicas e conteúdos sobre saúde animal</p>
+                    </div>
 
-            <!-- Card Instagram -->
-            <div
-                class="max-w-md mx-auto bg-white rounded-3xl shadow-2xl overflow-hidden hover:shadow-xl transition-smooth fade-in">
-                <!-- Header do Perfil -->
-                <div class="p-6 flex items-center gap-4 border-b border-gray-100">
+                    <!-- Card Instagram -->
                     <div
-                        class="w-16 h-16 rounded-full p-[3px] bg-gradient-to-tr from-yellow-400 via-pink-500 to-purple-600">
-                        <div class="bg-white w-full h-full rounded-full p-[3px] overflow-hidden">
-                            <img src="perfil-3.jpeg" alt="@rennevet" class="w-full h-full object-cover rounded-full">
+                        class="max-w-md mx-auto bg-white rounded-3xl shadow-2xl overflow-hidden hover:shadow-xl transition-smooth reveal-scale">
+                        <!-- Header do Perfil -->
+                        <div class="p-6 flex items-center gap-4 border-b border-gray-100">
+                            <div
+                                class="w-16 h-16 rounded-full p-[3px] bg-gradient-to-tr from-yellow-400 via-pink-500 to-purple-600">
+                                <div class="bg-white w-full h-full rounded-full p-[3px] overflow-hidden">
+                                    <img src="perfil-3.jpeg" alt="@rennevet"
+                                        class="w-full h-full object-cover rounded-full">
+                                </div>
+                            </div>
+                            <div class="flex-1 text-left">
+                                <h3 class="font-bold text-vet-escuro text-lg">@rennevet</h3>
+                                <p class="text-xs text-gray-500">Dr. Rennê Costa</p>
+                            </div>
+                            <a href="https://www.instagram.com/rennevet/" target="_blank"
+                                class="bg-vet-escuro text-white px-6 py-2 rounded-lg text-sm font-bold hover:bg-vet-claro transition-smooth">
+                                Seguir
+                            </a>
+                        </div>
+
+                        <!-- Grid de Fotos -->
+                        <div class="grid grid-cols-3 gap-1 bg-gray-100">
+                            <div class="aspect-square overflow-hidden relative group">
+                                <img src="foto-com-pacientes7.jpeg"
+                                    class="w-full h-full object-cover group-hover:scale-110 transition-smooth">
+                            </div>
+                            <div class="aspect-square overflow-hidden relative group">
+                                <img src="foto-com-pacientes10.jpeg"
+                                    class="w-full h-full object-cover group-hover:scale-110 transition-smooth">
+                            </div>
+                            <div class="aspect-square overflow-hidden relative group">
+                                <img src="foto-com-pacientes14.jpeg"
+                                    class="w-full h-full object-cover group-hover:scale-110 transition-smooth">
+                            </div>
+                        </div>
+
+                        <!-- Footer -->
+                        <div class="p-4 text-center bg-gray-50 border-t border-gray-100">
+                            <a href="https://www.instagram.com/rennevet/" target="_blank"
+                                class="text-vet-claro text-sm font-bold hover:text-vet-escuro inline-flex items-center gap-2 transition-smooth">
+                                Ver mais publicações
+                                <i class="fa-solid fa-arrow-right text-xs"></i>
+                            </a>
                         </div>
                     </div>
-                    <div class="flex-1 text-left">
-                        <h3 class="font-bold text-vet-escuro text-lg">@rennevet</h3>
-                        <p class="text-xs text-gray-500">Dr. Rennê Costa</p>
-                    </div>
-                    <a href="https://www.instagram.com/rennevet/" target="_blank"
-                        class="bg-vet-escuro text-white px-6 py-2 rounded-lg text-sm font-bold hover:bg-vet-claro transition-smooth">
-                        Seguir
-                    </a>
                 </div>
+            </section>
 
-                <!-- Grid de Fotos -->
-                <div class="grid grid-cols-3 gap-1 bg-gray-100">
-                    <div class="aspect-square overflow-hidden relative group">
-                        <img src="foto-com-pacientes5.jpeg"
-                            class="w-full h-full object-cover group-hover:scale-110 transition-smooth">
-                    </div>
-                    <div class="aspect-square overflow-hidden relative group">
-                        <img src="foto-com-pacientes6.jpeg"
-                            class="w-full h-full object-cover group-hover:scale-110 transition-smooth">
-                    </div>
-                    <div class="aspect-square overflow-hidden relative group">
-                        <img src="foto-com-pacientes3.jpeg"
-                            class="w-full h-full object-cover group-hover:scale-110 transition-smooth">
-                    </div>
-                </div>
+            <!-- Transição: Instagram → Galeria -->
 
-                <!-- Footer -->
-                <div class="p-4 text-center bg-gray-50 border-t border-gray-100">
-                    <a href="https://www.instagram.com/rennevet/" target="_blank"
-                        class="text-vet-claro text-sm font-bold hover:text-vet-escuro inline-flex items-center gap-2 transition-smooth">
-                        Ver mais publicações
-                        <i class="fa-solid fa-arrow-right text-xs"></i>
-                    </a>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- =========================================
+            <!-- =========================================
          GALERIA DE PACIENTES (CARROSSEL)
     ========================================== -->
-    <section id="galeria" class="py-20 md:py-24 bg-vet-beige border-t border-gray-100 overflow-hidden">
-        <div class="container mx-auto px-6 mb-12">
-            <div class="text-center fade-in">
-                <h2 class="text-4xl md:text-5xl font-serif font-bold text-vet-escuro mb-4">
-                    Momentos Especiais
-                </h2>
-                <p class="text-gray-600 text-lg">Um pouco do nosso cuidado em cada atendimento</p>
-            </div>
-        </div>
-
-        <!-- Carousel Container -->
-        <div class="swiper w-full pb-16 fade-in cursor-grab active:cursor-grabbing">
-            <div class="swiper-wrapper items-center">
-                <!-- Slide 1 -->
-                <div
-                    class="swiper-slide w-[80vw] sm:w-[60vw] md:w-[45vw] lg:w-[30vw] h-[400px] md:h-[500px] rounded-3xl overflow-hidden shadow-2xl relative group card-premium">
-                    <a href="foto-com-pacientes1.jpeg" class="glightbox block w-full h-full">
-                        <img src="foto-com-pacientes1.jpeg" alt="Paciente"
-                            class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out">
-                        <div
-                            class="absolute inset-0 bg-black/20 group-hover:bg-black/10 transition-colors duration-300">
-                        </div>
-                        <div
-                            class="absolute bottom-6 left-6 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                            <i class="fa-solid fa-expand text-2xl drop-shadow-md"></i>
-                        </div>
-                    </a>
+            <section id="galeria" class="py-20 md:py-24 bg-vet-beige overflow-hidden">
+                <div class="container mx-auto px-6 mb-12">
+                    <div class="text-center reveal">
+                        <h2 class="text-4xl md:text-5xl font-serif font-bold text-vet-escuro mb-4 section-headline">
+                            Momentos Especiais
+                        </h2>
+                        <p class="text-gray-600 text-lg">Um pouco do nosso cuidado em cada atendimento</p>
+                    </div>
                 </div>
 
-                <!-- Slide 2 -->
-                <div
-                    class="swiper-slide w-[80vw] sm:w-[60vw] md:w-[45vw] lg:w-[30vw] h-[400px] md:h-[500px] rounded-3xl overflow-hidden shadow-2xl relative group card-premium">
-                    <a href="foto-com-pacientes2.jpeg" class="glightbox block w-full h-full">
-                        <img src="foto-com-pacientes2.jpeg" alt="Paciente"
-                            class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out">
+                <!-- Carousel Container -->
+                <div class="swiper w-full pb-16 reveal cursor-grab active:cursor-grabbing">
+                    <div class="swiper-wrapper items-center">
+                        <!-- Slide 1 -->
                         <div
-                            class="absolute inset-0 bg-black/20 group-hover:bg-black/10 transition-colors duration-300">
+                            class="swiper-slide w-[80vw] sm:w-[60vw] md:w-[45vw] lg:w-[30vw] h-[400px] md:h-[500px] rounded-3xl overflow-hidden shadow-2xl relative group card-premium">
+                            <a href="foto-com-pacientes1.jpeg" class="glightbox block w-full h-full">
+                                <img src="foto-com-pacientes1.jpeg" alt="Paciente"
+                                    class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out">
+                                <div
+                                    class="absolute inset-0 bg-black/20 group-hover:bg-black/10 transition-colors duration-300">
+                                </div>
+                                <div
+                                    class="absolute bottom-6 left-6 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                                    <i class="fa-solid fa-expand text-2xl drop-shadow-md"></i>
+                                </div>
+                            </a>
                         </div>
+                        <!-- Slide 2 -->
                         <div
-                            class="absolute bottom-6 left-6 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                            <i class="fa-solid fa-expand text-2xl drop-shadow-md"></i>
+                            class="swiper-slide w-[80vw] sm:w-[60vw] md:w-[45vw] lg:w-[30vw] h-[400px] md:h-[500px] rounded-3xl overflow-hidden shadow-2xl relative group card-premium">
+                            <a href="foto-com-pacientes2.jpeg" class="glightbox block w-full h-full">
+                                <img src="foto-com-pacientes2.jpeg" alt="Paciente"
+                                    class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out">
+                                <div
+                                    class="absolute inset-0 bg-black/20 group-hover:bg-black/10 transition-colors duration-300">
+                                </div>
+                                <div
+                                    class="absolute bottom-6 left-6 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                                    <i class="fa-solid fa-expand text-2xl drop-shadow-md"></i>
+                                </div>
+                            </a>
                         </div>
-                    </a>
+                        <!-- Slide 3 -->
+                        <div
+                            class="swiper-slide w-[80vw] sm:w-[60vw] md:w-[45vw] lg:w-[30vw] h-[400px] md:h-[500px] rounded-3xl overflow-hidden shadow-2xl relative group card-premium">
+                            <a href="foto-com-pacientes3.jpeg" class="glightbox block w-full h-full">
+                                <img src="foto-com-pacientes3.jpeg" alt="Paciente"
+                                    class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out">
+                                <div
+                                    class="absolute inset-0 bg-black/20 group-hover:bg-black/10 transition-colors duration-300">
+                                </div>
+                                <div
+                                    class="absolute bottom-6 left-6 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                                    <i class="fa-solid fa-expand text-2xl drop-shadow-md"></i>
+                                </div>
+                            </a>
+                        </div>
+                        <!-- Slide 4 -->
+                        <div
+                            class="swiper-slide w-[80vw] sm:w-[60vw] md:w-[45vw] lg:w-[30vw] h-[400px] md:h-[500px] rounded-3xl overflow-hidden shadow-2xl relative group card-premium">
+                            <a href="foto-com-pacientes4.jpeg" class="glightbox block w-full h-full">
+                                <img src="foto-com-pacientes4.jpeg" alt="Paciente"
+                                    class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out">
+                                <div
+                                    class="absolute inset-0 bg-black/20 group-hover:bg-black/10 transition-colors duration-300">
+                                </div>
+                                <div
+                                    class="absolute bottom-6 left-6 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                                    <i class="fa-solid fa-expand text-2xl drop-shadow-md"></i>
+                                </div>
+                            </a>
+                        </div>
+                        <!-- Slide 5 -->
+                        <div
+                            class="swiper-slide w-[80vw] sm:w-[60vw] md:w-[45vw] lg:w-[30vw] h-[400px] md:h-[500px] rounded-3xl overflow-hidden shadow-2xl relative group card-premium">
+                            <a href="foto-com-pacientes5.jpeg" class="glightbox block w-full h-full">
+                                <img src="foto-com-pacientes5.jpeg" alt="Paciente"
+                                    class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out">
+                                <div
+                                    class="absolute inset-0 bg-black/20 group-hover:bg-black/10 transition-colors duration-300">
+                                </div>
+                                <div
+                                    class="absolute bottom-6 left-6 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                                    <i class="fa-solid fa-expand text-2xl drop-shadow-md"></i>
+                                </div>
+                            </a>
+                        </div>
+                        <!-- Slide 6 -->
+                        <div
+                            class="swiper-slide w-[80vw] sm:w-[60vw] md:w-[45vw] lg:w-[30vw] h-[400px] md:h-[500px] rounded-3xl overflow-hidden shadow-2xl relative group card-premium">
+                            <a href="foto-com-pacientes6.jpeg" class="glightbox block w-full h-full">
+                                <img src="foto-com-pacientes6.jpeg" alt="Paciente"
+                                    class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out">
+                                <div
+                                    class="absolute inset-0 bg-black/20 group-hover:bg-black/10 transition-colors duration-300">
+                                </div>
+                                <div
+                                    class="absolute bottom-6 left-6 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                                    <i class="fa-solid fa-expand text-2xl drop-shadow-md"></i>
+                                </div>
+                            </a>
+                        </div>
+                        <!-- Slide 7 -->
+                        <div
+                            class="swiper-slide w-[80vw] sm:w-[60vw] md:w-[45vw] lg:w-[30vw] h-[400px] md:h-[500px] rounded-3xl overflow-hidden shadow-2xl relative group card-premium">
+                            <a href="foto-com-pacientes7.jpeg" class="glightbox block w-full h-full">
+                                <img src="foto-com-pacientes7.jpeg" alt="Paciente"
+                                    class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out">
+                                <div
+                                    class="absolute inset-0 bg-black/20 group-hover:bg-black/10 transition-colors duration-300">
+                                </div>
+                                <div
+                                    class="absolute bottom-6 left-6 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                                    <i class="fa-solid fa-expand text-2xl drop-shadow-md"></i>
+                                </div>
+                            </a>
+                        </div>
+                        <!-- Slide 8 -->
+                        <div
+                            class="swiper-slide w-[80vw] sm:w-[60vw] md:w-[45vw] lg:w-[30vw] h-[400px] md:h-[500px] rounded-3xl overflow-hidden shadow-2xl relative group card-premium">
+                            <a href="foto-com-pacientes8.jpeg" class="glightbox block w-full h-full">
+                                <img src="foto-com-pacientes8.jpeg" alt="Paciente"
+                                    class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out">
+                                <div
+                                    class="absolute inset-0 bg-black/20 group-hover:bg-black/10 transition-colors duration-300">
+                                </div>
+                                <div
+                                    class="absolute bottom-6 left-6 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                                    <i class="fa-solid fa-expand text-2xl drop-shadow-md"></i>
+                                </div>
+                            </a>
+                        </div>
+                        <!-- Slide 9 -->
+                        <div
+                            class="swiper-slide w-[80vw] sm:w-[60vw] md:w-[45vw] lg:w-[30vw] h-[400px] md:h-[500px] rounded-3xl overflow-hidden shadow-2xl relative group card-premium">
+                            <a href="foto-com-pacientes9.jpeg" class="glightbox block w-full h-full">
+                                <img src="foto-com-pacientes9.jpeg" alt="Paciente"
+                                    class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out">
+                                <div
+                                    class="absolute inset-0 bg-black/20 group-hover:bg-black/10 transition-colors duration-300">
+                                </div>
+                                <div
+                                    class="absolute bottom-6 left-6 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                                    <i class="fa-solid fa-expand text-2xl drop-shadow-md"></i>
+                                </div>
+                            </a>
+                        </div>
+                        <!-- Slide 10 -->
+                        <div
+                            class="swiper-slide w-[80vw] sm:w-[60vw] md:w-[45vw] lg:w-[30vw] h-[400px] md:h-[500px] rounded-3xl overflow-hidden shadow-2xl relative group card-premium">
+                            <a href="foto-com-pacientes10.jpeg" class="glightbox block w-full h-full">
+                                <img src="foto-com-pacientes10.jpeg" alt="Paciente"
+                                    class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out">
+                                <div
+                                    class="absolute inset-0 bg-black/20 group-hover:bg-black/10 transition-colors duration-300">
+                                </div>
+                                <div
+                                    class="absolute bottom-6 left-6 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                                    <i class="fa-solid fa-expand text-2xl drop-shadow-md"></i>
+                                </div>
+                            </a>
+                        </div>
+                        <!-- Slide 11 -->
+                        <div
+                            class="swiper-slide w-[80vw] sm:w-[60vw] md:w-[45vw] lg:w-[30vw] h-[400px] md:h-[500px] rounded-3xl overflow-hidden shadow-2xl relative group card-premium">
+                            <a href="foto-com-pacientes11.jpeg" class="glightbox block w-full h-full">
+                                <img src="foto-com-pacientes11.jpeg" alt="Paciente"
+                                    class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out">
+                                <div
+                                    class="absolute inset-0 bg-black/20 group-hover:bg-black/10 transition-colors duration-300">
+                                </div>
+                                <div
+                                    class="absolute bottom-6 left-6 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                                    <i class="fa-solid fa-expand text-2xl drop-shadow-md"></i>
+                                </div>
+                            </a>
+                        </div>
+                        <!-- Slide 12 -->
+                        <div
+                            class="swiper-slide w-[80vw] sm:w-[60vw] md:w-[45vw] lg:w-[30vw] h-[400px] md:h-[500px] rounded-3xl overflow-hidden shadow-2xl relative group card-premium">
+                            <a href="foto-com-pacientes12.jpeg" class="glightbox block w-full h-full">
+                                <img src="foto-com-pacientes12.jpeg" alt="Paciente"
+                                    class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out">
+                                <div
+                                    class="absolute inset-0 bg-black/20 group-hover:bg-black/10 transition-colors duration-300">
+                                </div>
+                                <div
+                                    class="absolute bottom-6 left-6 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                                    <i class="fa-solid fa-expand text-2xl drop-shadow-md"></i>
+                                </div>
+                            </a>
+                        </div>
+                        <!-- Slide 13 -->
+                        <div
+                            class="swiper-slide w-[80vw] sm:w-[60vw] md:w-[45vw] lg:w-[30vw] h-[400px] md:h-[500px] rounded-3xl overflow-hidden shadow-2xl relative group card-premium">
+                            <a href="foto-com-pacientes13.jpeg" class="glightbox block w-full h-full">
+                                <img src="foto-com-pacientes13.jpeg" alt="Paciente"
+                                    class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out">
+                                <div
+                                    class="absolute inset-0 bg-black/20 group-hover:bg-black/10 transition-colors duration-300">
+                                </div>
+                                <div
+                                    class="absolute bottom-6 left-6 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                                    <i class="fa-solid fa-expand text-2xl drop-shadow-md"></i>
+                                </div>
+                            </a>
+                        </div>
+                        <!-- Slide 14 -->
+                        <div
+                            class="swiper-slide w-[80vw] sm:w-[60vw] md:w-[45vw] lg:w-[30vw] h-[400px] md:h-[500px] rounded-3xl overflow-hidden shadow-2xl relative group card-premium">
+                            <a href="foto-com-pacientes14.jpeg" class="glightbox block w-full h-full">
+                                <img src="foto-com-pacientes14.jpeg" alt="Paciente"
+                                    class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out">
+                                <div
+                                    class="absolute inset-0 bg-black/20 group-hover:bg-black/10 transition-colors duration-300">
+                                </div>
+                                <div
+                                    class="absolute bottom-6 left-6 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                                    <i class="fa-solid fa-expand text-2xl drop-shadow-md"></i>
+                                </div>
+                            </a>
+                        </div>
+                        <!-- Slide 15 -->
+                        <div
+                            class="swiper-slide w-[80vw] sm:w-[60vw] md:w-[45vw] lg:w-[30vw] h-[400px] md:h-[500px] rounded-3xl overflow-hidden shadow-2xl relative group card-premium">
+                            <a href="foto-com-pacientes15.jpeg" class="glightbox block w-full h-full">
+                                <img src="foto-com-pacientes15.jpeg" alt="Paciente"
+                                    class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out">
+                                <div
+                                    class="absolute inset-0 bg-black/20 group-hover:bg-black/10 transition-colors duration-300">
+                                </div>
+                                <div
+                                    class="absolute bottom-6 left-6 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                                    <i class="fa-solid fa-expand text-2xl drop-shadow-md"></i>
+                                </div>
+                            </a>
+                        </div>
+                        <!-- Slide 16 -->
+                        <div
+                            class="swiper-slide w-[80vw] sm:w-[60vw] md:w-[45vw] lg:w-[30vw] h-[400px] md:h-[500px] rounded-3xl overflow-hidden shadow-2xl relative group card-premium">
+                            <a href="foto-com-pacientes16.jpeg" class="glightbox block w-full h-full">
+                                <img src="foto-com-pacientes16.jpeg" alt="Paciente"
+                                    class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out">
+                                <div
+                                    class="absolute inset-0 bg-black/20 group-hover:bg-black/10 transition-colors duration-300">
+                                </div>
+                                <div
+                                    class="absolute bottom-6 left-6 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                                    <i class="fa-solid fa-expand text-2xl drop-shadow-md"></i>
+                                </div>
+                            </a>
+                        </div>
+                        <!-- Slide 17 -->
+                        <div
+                            class="swiper-slide w-[80vw] sm:w-[60vw] md:w-[45vw] lg:w-[30vw] h-[400px] md:h-[500px] rounded-3xl overflow-hidden shadow-2xl relative group card-premium">
+                            <a href="foto-com-pacientes17.jpeg" class="glightbox block w-full h-full">
+                                <img src="foto-com-pacientes17.jpeg" alt="Paciente"
+                                    class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out">
+                                <div
+                                    class="absolute inset-0 bg-black/20 group-hover:bg-black/10 transition-colors duration-300">
+                                </div>
+                                <div
+                                    class="absolute bottom-6 left-6 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                                    <i class="fa-solid fa-expand text-2xl drop-shadow-md"></i>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Pagination -->
+                    <div class="swiper-pagination !bottom-0"></div>
                 </div>
+            </section>
 
-                <!-- Slide 3 -->
-                <div
-                    class="swiper-slide w-[80vw] sm:w-[60vw] md:w-[45vw] lg:w-[30vw] h-[400px] md:h-[500px] rounded-3xl overflow-hidden shadow-2xl relative group card-premium">
-                    <a href="foto-com-pacientes3.jpeg" class="glightbox block w-full h-full">
-                        <img src="foto-com-pacientes3.jpeg" alt="Paciente"
-                            class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out">
-                        <div
-                            class="absolute inset-0 bg-black/20 group-hover:bg-black/10 transition-colors duration-300">
-                        </div>
-                        <div
-                            class="absolute bottom-6 left-6 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                            <i class="fa-solid fa-expand text-2xl drop-shadow-md"></i>
-                        </div>
-                    </a>
-                </div>
+            <!-- Transição: Galeria → Clínicas -->
 
-                <!-- Slide 4 -->
-                <div
-                    class="swiper-slide w-[80vw] sm:w-[60vw] md:w-[45vw] lg:w-[30vw] h-[400px] md:h-[500px] rounded-3xl overflow-hidden shadow-2xl relative group card-premium">
-                    <a href="foto-com-pacientes5.jpeg" class="glightbox block w-full h-full">
-                        <img src="foto-com-pacientes5.jpeg" alt="Paciente"
-                            class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out">
-                        <div
-                            class="absolute inset-0 bg-black/20 group-hover:bg-black/10 transition-colors duration-300">
-                        </div>
-                        <div
-                            class="absolute bottom-6 left-6 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                            <i class="fa-solid fa-expand text-2xl drop-shadow-md"></i>
-                        </div>
-                    </a>
-                </div>
-
-                <!-- Slide 5 -->
-                <div
-                    class="swiper-slide w-[80vw] sm:w-[60vw] md:w-[45vw] lg:w-[30vw] h-[400px] md:h-[500px] rounded-3xl overflow-hidden shadow-2xl relative group card-premium">
-                    <a href="foto-com-pacientes6.jpeg" class="glightbox block w-full h-full">
-                        <img src="foto-com-pacientes6.jpeg" alt="Paciente"
-                            class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out">
-                        <div
-                            class="absolute inset-0 bg-black/20 group-hover:bg-black/10 transition-colors duration-300">
-                        </div>
-                        <div
-                            class="absolute bottom-6 left-6 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                            <i class="fa-solid fa-expand text-2xl drop-shadow-md"></i>
-                        </div>
-                    </a>
-                </div>
-
-                <!-- CLONES MANUAIS PARA GARANTIR LOOP INFINITO E AUTOPLAY -->
-                <!-- Slide 6 (Clone 1) -->
-                <div
-                    class="swiper-slide w-[80vw] sm:w-[60vw] md:w-[45vw] lg:w-[30vw] h-[400px] md:h-[500px] rounded-3xl overflow-hidden shadow-2xl relative group card-premium">
-                    <a href="foto-com-pacientes1.jpeg" class="glightbox block w-full h-full">
-                        <img src="foto-com-pacientes1.jpeg" alt="Paciente"
-                            class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out">
-                        <div
-                            class="absolute inset-0 bg-black/20 group-hover:bg-black/10 transition-colors duration-300">
-                        </div>
-                        <div
-                            class="absolute bottom-6 left-6 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                            <i class="fa-solid fa-expand text-2xl drop-shadow-md"></i>
-                        </div>
-                    </a>
-                </div>
-
-                <!-- Slide 7 (Clone 2) -->
-                <div
-                    class="swiper-slide w-[80vw] sm:w-[60vw] md:w-[45vw] lg:w-[30vw] h-[400px] md:h-[500px] rounded-3xl overflow-hidden shadow-2xl relative group card-premium">
-                    <a href="foto-com-pacientes2.jpeg" class="glightbox block w-full h-full">
-                        <img src="foto-com-pacientes2.jpeg" alt="Paciente"
-                            class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out">
-                        <div
-                            class="absolute inset-0 bg-black/20 group-hover:bg-black/10 transition-colors duration-300">
-                        </div>
-                        <div
-                            class="absolute bottom-6 left-6 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                            <i class="fa-solid fa-expand text-2xl drop-shadow-md"></i>
-                        </div>
-                    </a>
-                </div>
-
-                <!-- Slide 8 (Clone 3) -->
-                <div
-                    class="swiper-slide w-[80vw] sm:w-[60vw] md:w-[45vw] lg:w-[30vw] h-[400px] md:h-[500px] rounded-3xl overflow-hidden shadow-2xl relative group card-premium">
-                    <a href="foto-com-pacientes3.jpeg" class="glightbox block w-full h-full">
-                        <img src="foto-com-pacientes3.jpeg" alt="Paciente"
-                            class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out">
-                        <div
-                            class="absolute inset-0 bg-black/20 group-hover:bg-black/10 transition-colors duration-300">
-                        </div>
-                        <div
-                            class="absolute bottom-6 left-6 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                            <i class="fa-solid fa-expand text-2xl drop-shadow-md"></i>
-                        </div>
-                    </a>
-                </div>
-
-                <!-- Slide 9 (Clone 4) -->
-                <div
-                    class="swiper-slide w-[80vw] sm:w-[60vw] md:w-[45vw] lg:w-[30vw] h-[400px] md:h-[500px] rounded-3xl overflow-hidden shadow-2xl relative group card-premium">
-                    <a href="foto-com-pacientes5.jpeg" class="glightbox block w-full h-full">
-                        <img src="foto-com-pacientes5.jpeg" alt="Paciente"
-                            class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out">
-                        <div
-                            class="absolute inset-0 bg-black/20 group-hover:bg-black/10 transition-colors duration-300">
-                        </div>
-                        <div
-                            class="absolute bottom-6 left-6 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                            <i class="fa-solid fa-expand text-2xl drop-shadow-md"></i>
-                        </div>
-                    </a>
-                </div>
-
-                <!-- Slide 10 (Clone 5) -->
-                <div
-                    class="swiper-slide w-[80vw] sm:w-[60vw] md:w-[45vw] lg:w-[30vw] h-[400px] md:h-[500px] rounded-3xl overflow-hidden shadow-2xl relative group card-premium">
-                    <a href="foto-com-pacientes6.jpeg" class="glightbox block w-full h-full">
-                        <img src="foto-com-pacientes6.jpeg" alt="Paciente"
-                            class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out">
-                        <div
-                            class="absolute inset-0 bg-black/20 group-hover:bg-black/10 transition-colors duration-300">
-                        </div>
-                        <div
-                            class="absolute bottom-6 left-6 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                            <i class="fa-solid fa-expand text-2xl drop-shadow-md"></i>
-                        </div>
-                    </a>
-                </div>
-            </div>
-
-            <!-- Pagination -->
-            <div class="swiper-pagination !bottom-0"></div>
-        </div>
-    </section>
-
-    <!-- =========================================
+            <!-- =========================================
          CLÍNICAS PARCEIRAS
     ========================================== -->
-    <section id="clinicas" class="py-20 md:py-24 bg-white border-t border-gray-100">
-        <div class="container mx-auto px-6">
-            <div class="text-center mb-16 fade-in">
-                <h2 class="text-4xl md:text-5xl font-serif font-bold text-vet-escuro mb-4">
-                    Atendimento em Clínica
-                </h2>
-                <p class="text-lg text-gray-600 max-w-2xl mx-auto">
-                    Prefere levar seu pet até o consultório? Também realizo atendimentos presenciais com hora marcada
-                    nas clínicas parceiras.
-                </p>
-            </div>
-
-            <div class="grid md:grid-cols-2 gap-8 md:gap-12 max-w-4xl mx-auto">
-
-                <!-- Clínica 1: Animalerie -->
-                <div
-                    class="card-premium bg-gradient-to-br from-white to-gray-50 p-10 rounded-3xl border border-gray-200 flex flex-col items-center text-center fade-in">
-                    <div
-                        class="bg-gradient-to-br from-vet-escuro to-vet-claro text-white w-20 h-20 rounded-2xl flex items-center justify-center text-3xl mb-6 shadow-xl">
-                        <i class="fa-solid fa-hospital"></i>
+            <section id="clinicas" class="py-20 md:py-24 bg-white">
+                <div class="container mx-auto px-6">
+                    <div class="text-center mb-16 reveal">
+                        <h2 class="text-4xl md:text-5xl font-serif font-bold text-vet-escuro mb-4 section-headline">
+                            Atendimento em Clínica
+                        </h2>
+                        <p class="text-lg text-gray-600 max-w-2xl mx-auto">
+                            Prefere levar seu pet até o consultório? Também realizo atendimentos presenciais com hora
+                            marcada
+                            nas clínicas parceiras.
+                        </p>
                     </div>
-                    <h3 class="text-2xl font-serif font-bold text-vet-escuro mb-2">Clínica Animalerie</h3>
-                    <p class="text-sm text-gray-500 mb-6">Rua São José - Lagoa Nova, Natal/RN</p>
 
-                    <a href="https://maps.app.goo.gl/WCQ1E7s9gVeDD8U97" target="_blank"
-                        class="inline-flex items-center gap-3 bg-white border-2 border-vet-escuro text-vet-escuro hover:bg-vet-escuro hover:text-white font-bold py-3 px-8 rounded-full transition-smooth shadow-lg hover:shadow-xl">
-                        <i class="fa-solid fa-map-location-dot"></i> Ver Localização
-                    </a>
-                </div>
+                    <div class="grid md:grid-cols-2 gap-8 md:gap-12 max-w-4xl mx-auto stagger-group">
 
-                <!-- Clínica 2: Amo Patas -->
-                <div class="card-premium bg-gradient-to-br from-white to-gray-50 p-10 rounded-3xl border border-gray-200 flex flex-col items-center text-center fade-in"
-                    style="transition-delay: 0.1s;">
-                    <div
-                        class="bg-gradient-to-br from-vet-claro to-green-600 text-white w-20 h-20 rounded-2xl flex items-center justify-center text-3xl mb-6 shadow-xl">
-                        <i class="fa-solid fa-paw"></i>
+                        <!-- Clínica 1: Animalerie -->
+                        <div
+                            class="card-premium bg-gradient-to-br from-white to-gray-50 p-10 rounded-3xl border border-gray-200 flex flex-col items-center text-center stagger-item">
+                            <div
+                                class="bg-gradient-to-br from-vet-escuro to-vet-claro text-white w-20 h-20 rounded-2xl flex items-center justify-center text-3xl mb-6 shadow-xl">
+                                <i class="fa-solid fa-hospital"></i>
+                            </div>
+                            <h3 class="text-2xl font-serif font-bold text-vet-escuro mb-2">Clínica Animalerie</h3>
+                            <p class="text-sm text-gray-500 mb-6">Rua São José - Lagoa Nova, Natal/RN</p>
+                            <a href="https://maps.app.goo.gl/WCQ1E7s9gVeDD8U97" target="_blank"
+                                class="inline-flex items-center gap-3 bg-white border-2 border-vet-escuro text-vet-escuro hover:bg-vet-escuro hover:text-white font-bold py-3 px-8 rounded-full transition-smooth shadow-lg hover:shadow-xl">
+                                <i class="fa-solid fa-map-location-dot"></i> Ver Localização
+                            </a>
+                        </div>
+
+                        <!-- Clínica 2: Amo Patas -->
+                        <div
+                            class="card-premium bg-gradient-to-br from-white to-gray-50 p-10 rounded-3xl border border-gray-200 flex flex-col items-center text-center stagger-item">
+                            <div
+                                class="bg-gradient-to-br from-vet-claro to-green-600 text-white w-20 h-20 rounded-2xl flex items-center justify-center text-3xl mb-6 shadow-xl">
+                                <i class="fa-solid fa-paw"></i>
+                            </div>
+                            <h3 class="text-2xl font-serif font-bold text-vet-escuro mb-2">Clínica Amo Patas</h3>
+                            <p class="text-sm text-gray-500 mb-6">Av. Pôrto de Pedras - Neópolis, Natal/RN</p>
+                            <a href="https://maps.app.goo.gl/KRrWtvCpsm4Uwjwg7" target="_blank"
+                                class="inline-flex items-center gap-3 bg-white border-2 border-vet-escuro text-vet-escuro hover:bg-vet-escuro hover:text-white font-bold py-3 px-8 rounded-full transition-smooth shadow-lg hover:shadow-xl">
+                                <i class="fa-solid fa-map-location-dot"></i> Ver Localização
+                            </a>
+                        </div>
+
                     </div>
-                    <h3 class="text-2xl font-serif font-bold text-vet-escuro mb-2">Clínica Amo Patas</h3>
-                    <p class="text-sm text-gray-500 mb-6">Av. Pôrto de Pedras - Neópolis, Natal/RN</p>
-
-                    <a href="https://maps.app.goo.gl/KRrWtvCpsm4Uwjwg7" target="_blank"
-                        class="inline-flex items-center gap-3 bg-white border-2 border-vet-escuro text-vet-escuro hover:bg-vet-escuro hover:text-white font-bold py-3 px-8 rounded-full transition-smooth shadow-lg hover:shadow-xl">
-                        <i class="fa-solid fa-map-location-dot"></i> Ver Localização
-                    </a>
                 </div>
+            </section>
 
-            </div>
-        </div>
-    </section>
+            <!-- Transição: Clínicas → FAQ -->
 
-    <!-- =========================================
+            <!-- =========================================
          FAQ
     ========================================== -->
-    <section id="faq" class="py-20 md:py-24 bg-vet-beige">
-        <div class="container mx-auto px-6 max-w-4xl">
-            <div class="text-center mb-16 fade-in">
-                <h2 class="text-4xl md:text-5xl font-serif font-bold text-vet-escuro mb-4">
-                    Perguntas Frequentes
-                </h2>
-                <p class="text-gray-600 text-lg">Tire suas dúvidas sobre o atendimento</p>
-            </div>
+            <section id="faq" class="py-20 md:py-24 bg-vet-beige">
+                <div class="container mx-auto px-6 max-w-4xl">
+                    <div class="text-center mb-16 reveal">
+                        <h2 class="text-4xl md:text-5xl font-serif font-bold text-vet-escuro mb-4 section-headline">
+                            Perguntas Frequentes
+                        </h2>
+                        <p class="text-gray-600 text-lg">Tire suas dúvidas sobre o atendimento</p>
+                    </div>
 
-            <div class="space-y-4">
-                <details
-                    class="card-premium bg-white p-6 rounded-2xl cursor-pointer group border-l-4 border-vet-claro fade-in">
-                    <summary class="font-bold text-vet-escuro flex justify-between items-center list-none text-lg">
-                        Em quais bairros de Natal você atende?
-                        <span class="transition-smooth group-open:rotate-180 text-vet-claro">
-                            <i class="fa-solid fa-chevron-down"></i>
-                        </span>
-                    </summary>
-                    <p class="mt-4 text-gray-600 leading-relaxed">
-                        Atendo a maioria dos bairros de Natal e Parnamirim. Entre em contato pelo WhatsApp informando
-                        seu endereço para verificar a disponibilidade e taxa de deslocamento.
-                    </p>
-                </details>
+                    <div class="space-y-4 stagger-group">
+                        <details
+                            class="card-premium bg-white p-6 rounded-2xl cursor-pointer group border-l-4 border-vet-claro stagger-item">
+                            <summary
+                                class="font-bold text-vet-escuro flex justify-between items-center list-none text-lg">
+                                Em quais bairros de Natal você atende?
+                                <span class="transition-smooth group-open:rotate-180 text-vet-claro">
+                                    <i class="fa-solid fa-chevron-down"></i>
+                                </span>
+                            </summary>
+                            <p class="mt-4 text-gray-600 leading-relaxed">
+                                Atendo a maioria dos bairros de Natal e Parnamirim. Entre em contato pelo WhatsApp
+                                informando
+                                seu endereço para verificar a disponibilidade e taxa de deslocamento.
+                            </p>
+                        </details>
 
-                <details
-                    class="card-premium bg-white p-6 rounded-2xl cursor-pointer group border-l-4 border-vet-claro fade-in"
-                    style="transition-delay: 0.1s;">
-                    <summary class="font-bold text-vet-escuro flex justify-between items-center list-none text-lg">
-                        Como agendar uma consulta?
-                        <span class="transition-smooth group-open:rotate-180 text-vet-claro">
-                            <i class="fa-solid fa-chevron-down"></i>
-                        </span>
-                    </summary>
-                    <p class="mt-4 text-gray-600 leading-relaxed">
-                        É muito simples! Basta clicar no botão do WhatsApp aqui no site ou salvar o número (84)
-                        99174-3293. Responderei o mais breve possível para combinarmos o horário.
-                    </p>
-                </details>
+                        <details
+                            class="card-premium bg-white p-6 rounded-2xl cursor-pointer group border-l-4 border-vet-claro stagger-item">
+                            <summary
+                                class="font-bold text-vet-escuro flex justify-between items-center list-none text-lg">
+                                Como agendar uma consulta?
+                                <span class="transition-smooth group-open:rotate-180 text-vet-claro">
+                                    <i class="fa-solid fa-chevron-down"></i>
+                                </span>
+                            </summary>
+                            <p class="mt-4 text-gray-600 leading-relaxed">
+                                É muito simples! Basta clicar no botão do WhatsApp aqui no site ou salvar o número (84)
+                                99174-3293. Responderei o mais breve possível para combinarmos o horário.
+                            </p>
+                        </details>
 
-                <details
-                    class="card-premium bg-white p-6 rounded-2xl cursor-pointer group border-l-4 border-vet-claro fade-in"
-                    style="transition-delay: 0.2s;">
-                    <summary class="font-bold text-vet-escuro flex justify-between items-center list-none text-lg">
-                        Quais as formas de pagamento?
-                        <span class="transition-smooth group-open:rotate-180 text-vet-claro">
-                            <i class="fa-solid fa-chevron-down"></i>
-                        </span>
-                    </summary>
-                    <p class="mt-4 text-gray-600 leading-relaxed">
-                        Aceito PIX, dinheiro em espécie e cartões de débito/crédito. O pagamento é feito ao final do
-                        atendimento.
-                    </p>
-                </details>
-            </div>
-        </div>
-    </section>
-
-    <!-- =========================================
-         RODAPÉ (FOOTER)
-    ========================================== -->
-    <footer class="bg-gradient-to-br from-vet-escuro to-[#153d31] text-white pt-20 pb-8 border-t-4 border-vet-claro">
-        <div class="container mx-auto px-6">
-            <div class="grid md:grid-cols-3 gap-12 mb-12">
-
-                <!-- Coluna 1 -->
-                <div>
-                    <h4 class="text-2xl font-serif font-bold mb-4 flex items-center gap-2">
-                        <i class="fa-solid fa-paw text-vet-claro"></i> Dr. Rennê Costa
-                    </h4>
-                    <p class="text-gray-300 leading-relaxed">
-                        Serviço veterinário domiciliar premium focado no bem-estar animal e na comodidade do
-                        responsável. Atendendo Natal/RN com excelência.
-                    </p>
-                </div>
-
-                <!-- Coluna 2 -->
-                <div>
-                    <h4 class="text-xl font-bold mb-6">Contato</h4>
-                    <ul class="space-y-4 text-gray-300">
-                        <li class="flex items-center gap-3">
-                            <i class="fa-brands fa-whatsapp text-green-400 text-xl"></i>
-                            <a href="https://wa.me/5584991743293" class="hover:text-white transition-smooth">(84)
-                                99174-3293</a>
-                        </li>
-                        <li class="flex items-center gap-3">
-                            <i class="fa-solid fa-location-dot text-vet-claro text-xl"></i>
-                            <span>Natal, Rio Grande do Norte</span>
-                        </li>
-                        <li class="flex items-center gap-3">
-                            <i class="fa-brands fa-instagram text-pink-400 text-xl"></i>
-                            <a href="https://www.instagram.com/rennevet/"
-                                class="hover:text-white transition-smooth">@rennevet</a>
-                        </li>
-                    </ul>
-                </div>
-
-                <!-- Coluna 3 -->
-                <div>
-                    <h4 class="text-xl font-bold mb-6">Horário de Atendimento</h4>
-                    <p class="text-gray-300 mb-6">
-                        Atendimento mediante agendamento prévio via WhatsApp.
-                    </p>
-                    <div class="flex gap-4">
-                        <a href="https://www.instagram.com/rennevet/" target="_blank"
-                            class="bg-white/10 w-12 h-12 flex items-center justify-center rounded-xl hover:bg-vet-claro transition-smooth text-xl">
-                            <i class="fa-brands fa-instagram"></i>
-                        </a>
-                        <a href="https://wa.me/5584991743293" target="_blank"
-                            class="bg-white/10 w-12 h-12 flex items-center justify-center rounded-xl hover:bg-green-500 transition-smooth text-xl">
-                            <i class="fa-brands fa-whatsapp"></i>
-                        </a>
+                        <details
+                            class="card-premium bg-white p-6 rounded-2xl cursor-pointer group border-l-4 border-vet-claro stagger-item">
+                            <summary
+                                class="font-bold text-vet-escuro flex justify-between items-center list-none text-lg">
+                                Quais as formas de pagamento?
+                                <span class="transition-smooth group-open:rotate-180 text-vet-claro">
+                                    <i class="fa-solid fa-chevron-down"></i>
+                                </span>
+                            </summary>
+                            <p class="mt-4 text-gray-600 leading-relaxed">
+                                Aceito PIX, dinheiro em espécie e cartões de débito/crédito. O pagamento é feito ao
+                                final do
+                                atendimento.
+                            </p>
+                        </details>
                     </div>
                 </div>
-            </div>
+            </section>
 
-            <div class="border-t border-white/10 pt-8 text-center text-sm text-gray-400">
-                <p>&copy; 2025 Dr. Rennê Costa - CRMV-RN 2089. Todos os direitos reservados.</p>
-            </div>
-        </div>
-    </footer>
+            <!-- Transição: FAQ → Rodapé -->
 
-    <!-- BOTÃO FLUTUANTE WHATSAPP -->
-    <a href="https://wa.me/5584991743293" target="_blank"
-        class="zap-flutuante bg-[#25D366] text-white w-16 h-16 md:w-20 md:h-20 rounded-full flex items-center justify-center hover:bg-green-600 transition-smooth"
-        title="Agendar no WhatsApp">
-        <i class="fa-brands fa-whatsapp text-3xl md:text-4xl"></i>
-    </a>
-
-    <!-- =========================================
-         SCRIPTS
+            <!-- =========================================
+         RODAPÉ (FOOTER)
     ========================================== -->
+            <footer class="bg-gradient-to-br from-vet-escuro to-[#153d31] text-white pt-20 pb-8">
+                <div class="container mx-auto px-6">
+                    <div class="grid md:grid-cols-3 gap-12 mb-12">
 
-    <!-- Script Menu Mobile -->
-    <script>
-        const btn = document.getElementById('menu-btn');
-        const menu = document.getElementById('mobile-menu');
+                        <!-- Coluna 1 -->
+                        <div>
+                            <h4 class="text-2xl font-serif font-bold mb-4 flex items-center gap-2">
+                                <i class="fa-solid fa-paw text-vet-claro"></i> Dr. Rennê Costa
+                            </h4>
+                            <p class="text-gray-300 leading-relaxed">
+                                Serviço veterinário domiciliar premium focado no bem-estar animal e na comodidade do
+                                responsável. Atendendo Natal/RN com excelência.
+                            </p>
+                        </div>
 
-        btn.addEventListener('click', () => {
-            menu.classList.toggle('hidden');
-        });
+                        <!-- Coluna 2 -->
+                        <div>
+                            <h4 class="text-xl font-bold mb-6">Contato</h4>
+                            <ul class="space-y-4 text-gray-300">
+                                <li class="flex items-center gap-3">
+                                    <i class="fa-brands fa-whatsapp text-green-400 text-xl"></i>
+                                    <a href="https://wa.me/5584991743293"
+                                        class="hover:text-white transition-smooth">(84)
+                                        99174-3293</a>
+                                </li>
+                                <li class="flex items-center gap-3">
+                                    <i class="fa-solid fa-location-dot text-vet-claro text-xl"></i>
+                                    <span>Natal, Rio Grande do Norte</span>
+                                </li>
+                                <li class="flex items-center gap-3">
+                                    <i class="fa-brands fa-instagram text-pink-400 text-xl"></i>
+                                    <a href="https://www.instagram.com/rennevet/"
+                                        class="hover:text-white transition-smooth">@rennevet</a>
+                                </li>
+                            </ul>
+                        </div>
 
-        menu.querySelectorAll('a').forEach(link => {
-            link.addEventListener('click', () => {
-                menu.classList.add('hidden');
-            });
-        });
-    </script>
+                        <!-- Coluna 3 -->
+                        <div>
+                            <h4 class="text-xl font-bold mb-6">Horário de Atendimento</h4>
+                            <p class="text-gray-300 mb-6">
+                                Atendimento mediante agendamento prévio via WhatsApp.
+                            </p>
+                            <div class="flex gap-4">
+                                <a href="https://www.instagram.com/rennevet/" target="_blank"
+                                    class="bg-white/10 w-12 h-12 flex items-center justify-center rounded-xl hover:bg-vet-claro transition-smooth text-xl">
+                                    <i class="fa-brands fa-instagram"></i>
+                                </a>
+                                <a href="https://wa.me/5584991743293" target="_blank"
+                                    class="bg-white/10 w-12 h-12 flex items-center justify-center rounded-xl hover:bg-green-500 transition-smooth text-xl">
+                                    <i class="fa-brands fa-whatsapp"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
 
-    <!-- GSAP & ScrollTrigger -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+                    <div class="border-t border-white/10 pt-8 text-center text-sm text-gray-400">
+                        <p>&copy; 2025 Dr. Rennê Costa - CRMV-RN 2089. Todos os direitos reservados.</p>
+                    </div>
+                </div>
+            </footer>
 
-    <!-- Swiper JS -->
-    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+            <!-- BOTÃO FLUTUANTE WHATSAPP -->
+            <a href="https://wa.me/5584991743293" target="_blank"
+                class="zap-flutuante bg-[#25D366] text-white w-16 h-16 md:w-20 md:h-20 rounded-full flex items-center justify-center hover:bg-green-600 transition-smooth"
+                title="Agendar no WhatsApp">
+                <i class="fa-brands fa-whatsapp text-3xl md:text-4xl"></i>
+            </a>
 
-    <!-- GLightbox JS -->
-    <script src="https://cdn.jsdelivr.net/gh/mcstudios/glightbox/dist/js/glightbox.min.js"></script>
+            <!-- Script Menu Mobile -->
+            <script>
+                const btn = document.getElementById('menu-btn');
+                const menu = document.getElementById('mobile-menu');
 
-    <!-- Initialize Libraries & Animations -->
-    <script>
-        // Init Lightbox
-        const lightbox = GLightbox({
-            selector: '.glightbox',
-            touchNavigation: true,
-            loop: true,
-            zoomable: true
-        });
+                btn.addEventListener('click', () => {
+                    menu.classList.toggle('hidden');
+                });
 
-        // Init Swiper Carousel
-        const swiper = new Swiper('.swiper', {
-            slidesPerView: 'auto',
-            centeredSlides: true,
-            spaceBetween: 24,
-            loop: true,
-            loopAdditionalSlides: 5,
-            autoplay: {
-                delay: 2500,
-                disableOnInteraction: false,
-            },
-            speed: 800,
-            pagination: {
-                el: '.swiper-pagination',
-                clickable: true,
-            },
-        });
+                menu.querySelectorAll('a').forEach(link => {
+                    link.addEventListener('click', () => {
+                        menu.classList.add('hidden');
+                    });
+                });
+            </script>
 
-        // Initialize GSAP ScrollTrigger
-        gsap.registerPlugin(ScrollTrigger);
+            <!-- GSAP & ScrollTrigger -->
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
 
-        // Animate elements with fade-in class
-        gsap.utils.toArray('.fade-in').forEach(element => {
-            // Remove the CSS transition so GSAP can take over smoothly
-            element.style.transition = 'none';
-            gsap.fromTo(element,
-                { opacity: 0, y: 40 },
-                {
-                    opacity: 1,
-                    y: 0,
-                    duration: 1,
-                    ease: 'power3.out',
+            <!-- Swiper JS -->
+            <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+
+            <!-- GLightbox JS -->
+            <script src="https://cdn.jsdelivr.net/gh/mcstudios/glightbox/dist/js/glightbox.min.js"></script>
+
+            <!-- Initialize Libraries & Animations -->
+            <script>
+                // Init Lightbox
+                const lightbox = GLightbox({
+                    selector: '.glightbox',
+                    touchNavigation: true,
+                    loop: true,
+                    zoomable: true
+                });
+
+                // Init Swiper Carousel
+                const swiper = new Swiper('.swiper', {
+                    slidesPerView: 'auto',
+                    centeredSlides: true,
+                    spaceBetween: 24,
+                    loop: true,
+                    loopAdditionalSlides: 5,
+                    autoplay: {
+                        delay: 2500,
+                        disableOnInteraction: false,
+                    },
+                    speed: 800,
+                    pagination: {
+                        el: '.swiper-pagination',
+                        clickable: true,
+                    },
+                });
+
+                // ── GSAP ScrollTrigger ──────────────────────────────
+                gsap.registerPlugin(ScrollTrigger);
+
+                // ── 1. BARRA DE PROGRESSO DE SCROLL ─────────────────
+                const progressBar = document.createElement('div');
+                progressBar.id = 'scroll-progress';
+                document.body.prepend(progressBar);
+                window.addEventListener('scroll', () => {
+                    const pct = window.scrollY / (document.body.scrollHeight - window.innerHeight);
+                    progressBar.style.width = (pct * 100) + '%';
+                }, { passive: true });
+
+                // ── 2. PARALLAX NO HERO ──────────────────────────────
+                gsap.to('.hero-section .absolute.inset-0', {
+                    yPercent: 22,
+                    ease: 'none',
                     scrollTrigger: {
-                        trigger: element,
-                        start: 'top 85%',
-                        toggleActions: 'play none none reverse'
+                        trigger: '.hero-section',
+                        start: 'top top',
+                        end: 'bottom top',
+                        scrub: 1.2
                     }
-                }
-            );
-        });
+                });
 
-        // Smooth Parallax for Hero Background
-        gsap.to('.hero-bg', {
-            yPercent: 30,
-            ease: 'none',
-            scrollTrigger: {
-                trigger: '.hero-section',
-                start: 'top top',
-                end: 'bottom top',
-                scrub: true
-            }
-        });
-    </script>
+                // ── 3. REVEAL GENÉRICO (.reveal) ────────────────────
+                gsap.utils.toArray('.reveal').forEach(el => {
+                    gsap.to(el, {
+                        opacity: 1, y: 0,
+                        duration: 1.1, ease: 'power3.out',
+                        scrollTrigger: { trigger: el, start: 'top 86%' }
+                    });
+                });
+                gsap.utils.toArray('.reveal-left').forEach(el => {
+                    gsap.to(el, {
+                        opacity: 1, x: 0,
+                        duration: 1.1, ease: 'power3.out',
+                        scrollTrigger: { trigger: el, start: 'top 86%' }
+                    });
+                });
+                gsap.utils.toArray('.reveal-right').forEach(el => {
+                    gsap.to(el, {
+                        opacity: 1, x: 0,
+                        duration: 1.1, ease: 'power3.out',
+                        scrollTrigger: { trigger: el, start: 'top 86%' }
+                    });
+                });
+                gsap.utils.toArray('.reveal-scale').forEach(el => {
+                    gsap.to(el, {
+                        opacity: 1, scale: 1,
+                        duration: 1.0, ease: 'back.out(1.4)',
+                        scrollTrigger: { trigger: el, start: 'top 88%' }
+                    });
+                });
+
+                // ── 4. STAGGER EM GRUPOS ─────────────────────────────
+                gsap.utils.toArray('.stagger-group').forEach(group => {
+                    const children = group.querySelectorAll('.stagger-item');
+                    gsap.fromTo(children,
+                        { opacity: 0, y: 45 },
+                        {
+                            opacity: 1, y: 0,
+                            duration: 0.85, ease: 'power3.out',
+                            stagger: 0.15,
+                            scrollTrigger: { trigger: group, start: 'top 82%' }
+                        }
+                    );
+                });
+
+                // ── 5. LINE SWEEP nos titulos .section-headline ─────
+                gsap.utils.toArray('.section-headline').forEach(el => {
+                    ScrollTrigger.create({
+                        trigger: el,
+                        start: 'top 84%',
+                        onEnter: () => {
+                            gsap.to(el.querySelector ? el : el, {
+                                duration: 0
+                            });
+                            el.style.setProperty('--lw', '60px');
+                            gsap.to(el, {
+                                '--lw': '0px', duration: 0
+                            });
+                            gsap.fromTo(el, { '--uw': '0%' }, {
+                                '--uw': '100%', duration: 0
+                            });
+                            // fallback: animate via pseudo-element width using class
+                            el.classList.add('headline-active');
+                        }
+                    });
+                });
+                // CSS adicional para a animação da linha
+                const lineStyle = document.createElement('style');
+                lineStyle.textContent = `.headline-active::after { animation: lineReveal 0.7s cubic-bezier(0.22,1,0.36,1) forwards; } @keyframes lineReveal { from { width: 0 } to { width: 60% } }`;
+                document.head.appendChild(lineStyle);
+
+                // ── 6. FADE-IN legado (retrocompatibilidade) ─────────
+                gsap.utils.toArray('.fade-in').forEach(el => {
+                    el.style.transition = 'none';
+                    gsap.fromTo(el,
+                        { opacity: 0, y: 36 },
+                        {
+                            opacity: 1, y: 0, duration: 1, ease: 'power3.out',
+                            scrollTrigger: { trigger: el, start: 'top 85%' }
+                        }
+                    );
+                });
+
+                // ── 7. COUNTER ANIMADO em .stat-number ───────────────
+                gsap.utils.toArray('.stat-number').forEach(el => {
+                    const end = parseFloat(el.dataset.target || el.innerText);
+                    const suffix = el.dataset.suffix || '';
+                    gsap.fromTo({ val: 0 }, { val: end },
+                        {
+                            duration: 2.2, ease: 'power2.out',
+                            onUpdate: function () { el.innerText = Math.round(this.targets()[0].val) + suffix; },
+                            scrollTrigger: { trigger: el, start: 'top 88%', once: true }
+                        }
+                    );
+                });
+
+                // ── 8. HERO texto entry animation ────────────────────
+                gsap.timeline({ delay: 0.3 })
+                    .fromTo('.hero-section .reveal-left span',
+                        { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.7, ease: 'power3.out' })
+                    .fromTo('.hero-section h1',
+                        { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.9, ease: 'power3.out' }, '-=0.3')
+                    .fromTo('.hero-section p',
+                        { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.7, ease: 'power2.out' }, '-=0.4')
+                    .fromTo('.hero-section .flex.flex-col a',
+                        { opacity: 0, y: 16 }, { opacity: 1, y: 0, duration: 0.6, ease: 'power2.out', stagger: 0.15 }, '-=0.3')
+                    .fromTo('.hero-section .reveal-right',
+                        { opacity: 0, x: 50 }, { opacity: 1, x: 0, duration: 1.1, ease: 'power3.out' }, '-=0.7');
+            </script>
 
 </body>
 
